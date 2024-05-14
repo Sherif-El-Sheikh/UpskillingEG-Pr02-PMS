@@ -1,0 +1,53 @@
+/* -------------------- Utility classes -------------------- */
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.text-main {
+  color: #ef9b28 !important;
+}
+/* -------------------- Utility classes -------------------- */
+
+/* --------------------  Auth Form -------------------- */
+.auth-form {
+  background-color: rgba(49, 89, 81, 0.9);
+  max-width: 60vw !important;
+  color: white;
+}
+
+.auth-form h1 {
+  color: #ef9b28;
+}
+
+.auth-form h1::first-letter {
+  border-bottom: 5px solid currentColor;
+  padding-bottom: 2px;
+}
+/* --------------------  Auth Form -------------------- */
+
+/* --------------------  Global Form Styles -------------------- */
+form .field-name {
+  color: #ef9b28;
+}
+.form-control {
+  color: white !important;
+}
+.form-control::placeholder {
+  color: white !important;
+  letter-spacing: 0.07rem !important;
+  font-weight: 100 !important;
+}
+.form-control:focus {
+  outline: none !important;
+  border: none !important;
+  box-shadow: 0 0 0.25rem rgba(61, 124, 112, 0.9) !important;
+}
+
+.submit-btn {
+  background-color: #ef9b28 !important;
+}
+/* --------------------  Global Form Styles -------------------- */
+
+/* 
+  Testing GitHub
+*/
