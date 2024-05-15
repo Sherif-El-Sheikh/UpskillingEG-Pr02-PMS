@@ -8,7 +8,7 @@ const AuthForm = ({ children }: { children: React.ReactNode }) => {
         <img src={Logo} alt='logo' className='img-fluid logo' />
       </div>
       {/* Form */}
-      <div className='row auth-form p-5 rounded rounded-5'>
+      <div className='row auth-form p-sm-5 rounded rounded-5'>
         <span>Welcome to PMS</span>
         {children}
       </div>
