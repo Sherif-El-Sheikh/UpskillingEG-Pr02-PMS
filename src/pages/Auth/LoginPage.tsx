@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { useForm } from 'react-hook-form'
-import { useNavigate, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { apiPublic } from '../../utils/api'
 import { notify } from '../../utils/notify'
 
@@ -8,6 +8,7 @@ import { Form, InputGroup } from 'react-bootstrap'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import { LoadingSpinner } from '../../components/shared'
 import AuthLayout from '../../layouts/AuthLayout'
+import { AuthContext, AuthContextType } from '../../contexts/AuthContext'
 
 // type of data from form
 interface FormData {
@@ -16,7 +17,7 @@ interface FormData {
 }
 
 const LoginPage = () => {
-  const navigate = useNavigate()
+  const { saveLoginData } = useContext(AuthContext) as AuthContextType
   const [btnLoading, setBtnLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const {
@@ -33,7 +34,7 @@ const LoginPage = () => {
         type: 'success',
         message: 'Logged in successfully',
       })
-      navigate('/dashboard')
+      saveLoginData()
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       notify({
