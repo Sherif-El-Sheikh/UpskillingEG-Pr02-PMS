@@ -93,6 +93,10 @@ const RegisterPage = () => {
                   aria-label='Username'
                   {...register('userName', {
                     required: 'username is required',
+                    maxLength: {
+                      value: 8,
+                      message: 'Username should not exceed 8 characters',
+                    },
                   })}
                 />
               </InputGroup>
