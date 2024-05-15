@@ -25,6 +25,28 @@
 }
 /* --------------------  Auth Form -------------------- */
 
+/* -------------------- Responsive Auth Form -------------------- */
+@media(max-width: 991px) {
+  .auth-form {
+    max-width: 95vw !important;
+  }
+}
+
+@media (max-width: 575px) {
+  .auth-form {
+    padding: 2rem !important;
+  }
+}
+
+@media (max-width: 375px) {
+
+  .auth-form {
+    padding: 1.1rem !important;
+    margin: 0 !important;
+  }
+}
+/* -------------------- Responsive Auth Form -------------------- */
+
 /* --------------------  Global Form Styles -------------------- */
 form .field-name {
   color: #ef9b28;
