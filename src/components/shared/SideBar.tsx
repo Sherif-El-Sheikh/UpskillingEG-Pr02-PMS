@@ -11,8 +11,8 @@ import { IoClose } from 'react-icons/io5'
 import { Modal } from 'react-bootstrap'
 
 import { useState, useContext } from 'react'
-import { AuthContext, AuthContextType } from '../../../contexts/AuthContext'
-import ChangePass from '../ChangePass'
+import { AuthContext, AuthContextType } from '../../contexts/AuthContext'
+import ChangePass from './ChangePass'
 import './styles/Sidebar.css'
 
 const SideBar = () => {

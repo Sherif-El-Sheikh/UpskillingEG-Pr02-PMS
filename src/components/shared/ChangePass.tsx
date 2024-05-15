@@ -133,7 +133,7 @@ const ChangePass = ({ handleClose }: { handleClose: () => void }) => {
           type='submit'
           className='d-block btn submit-btn w-75 mt-5 mx-auto rounded-5 py-2 text-white'
         >
-          {btnLoading ? <LoadingSpinner loadingTxt='Save' /> : 'Save'}
+          {btnLoading ? <LoadingSpinner loadingTxt='Changing Your Password' /> : 'Change'}
         </button>
       </Form>
     </AuthForm>
