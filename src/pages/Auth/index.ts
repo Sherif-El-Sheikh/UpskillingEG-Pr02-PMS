@@ -1,9 +1,8 @@
-import LoginPage from "./LoginPage";
-import RegisterPage from "./RegisterPage";
-import ForgotPassPage from "./ForgotPassPage";
-import VerifyPassPage from "./VerifyPassPage";
-import ResetPassPage from "./ResetPassPage";
-import ChangPassPage from "./ChangePassPage";
+import LoginPage from './LoginPage'
+import RegisterPage from './RegisterPage'
+import ForgotPassPage from './ForgotPassPage'
+import VerifyPassPage from './VerifyPassPage'
+import ResetPassPage from './ResetPassPage'
 
 export {
   LoginPage,
@@ -11,5 +10,4 @@ export {
   ForgotPassPage,
   VerifyPassPage,
   ResetPassPage,
-  ChangPassPage,
-};
+}
