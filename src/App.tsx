@@ -21,7 +21,7 @@ import {
   VerifyPassPage,
   ResetPassPage,
 } from './pages/Auth'
-import { Home } from './pages/Dashboard'
+import { Home, Projects, Tasks, Users } from './pages/Dashboard'
 // RouteGuard and Layouts
 import { RouteGuard } from './components/shared'
 import { MasterLayout, AuthLayoutWrapper } from './layouts'
@@ -31,8 +31,8 @@ function App() {
   // auth context
   const { loggedIn, saveLoginData } = useContext(AuthContext) as AuthContextType
   useEffect(() => {
-    console.log('App mounted', loggedIn);
-    
+    console.log('App mounted', loggedIn)
+
     saveLoginData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loggedIn])
@@ -45,36 +45,76 @@ function App() {
         <Route
           path='/dashboard'
           element={
-            <RouteGuard redirectPath='/login' isAllowed={loggedIn}>
+            <RouteGuard
+              redirectPath='/login'
+              isAllowed={loggedIn}
+            >
               <MasterLayout />
             </RouteGuard>
-        
           }
-          errorElement={<Notfound/>}
+          errorElement={<Notfound />}
         >
+          <Route
+            index
+            element={<Home />}
+          />
 
-          <Route index element={<Home />} />
+          <Route
+            path='Home'
+            element={<Home />}
+          />
+          <Route
+            path='Users'
+            element={<Users />}
+          />
+          <Route
+            path='Projects'
+            element={<Projects />}
+          />
+          <Route
+            path='Tasks'
+            element={<Tasks />}
+          />
         </Route>
 
         {/* ------------ Auth Layout ------------ */}
         <Route
           path='/'
           element={
-            <RouteGuard redirectPath='/dashboard' isAllowed={!loggedIn}>
+            <RouteGuard
+              redirectPath='/dashboard'
+              isAllowed={!loggedIn}
+            >
               <AuthLayoutWrapper />
             </RouteGuard>
           }
-          errorElement={<Notfound/>}
+          errorElement={<Notfound />}
         >
-          <Route index element={<LoginPage />} />
-          <Route path='login' element={<LoginPage />} />
-          <Route path='register' element={<RegisterPage />} />
-          <Route path='forgot-password' element={<ForgotPassPage />} />
-          <Route path='verify-password' element={<VerifyPassPage />} />
-          <Route path='reset-password' element={<ResetPassPage />} />
-        
+          <Route
+            index
+            element={<LoginPage />}
+          />
+          <Route
+            path='login'
+            element={<LoginPage />}
+          />
+          <Route
+            path='register'
+            element={<RegisterPage />}
+          />
+          <Route
+            path='forgot-password'
+            element={<ForgotPassPage />}
+          />
+          <Route
+            path='verify-password'
+            element={<VerifyPassPage />}
+          />
+          <Route
+            path='reset-password'
+            element={<ResetPassPage />}
+          />
         </Route>
-
       </>,
     ])
   )

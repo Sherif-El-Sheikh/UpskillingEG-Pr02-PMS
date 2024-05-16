@@ -2,6 +2,7 @@ import { createContext, useState } from 'react'
 import { jwtDecode } from 'jwt-decode'
 
 export type AuthContextType = {
+  userData: Record<string, string>
   loggedIn: boolean
   loading: boolean
   saveLoginData: () => void
@@ -11,6 +12,7 @@ export type AuthContextType = {
 export const AuthContext = createContext<AuthContextType | null>(null)
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+  const [userData, setUserData] = useState({})
   const [loggedIn, setIsLoggedIn] = useState(false)
   const [loading, setLoading] = useState(false)
 
@@ -21,8 +23,10 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       const decodedToken = jwtDecode(token)
       if (decodedToken) {
         setIsLoggedIn(true)
+        setUserData(decodedToken)
       } else {
         setIsLoggedIn(false)
+        setUserData(false)
       }
     }
     setLoading(false)
@@ -36,6 +40,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <AuthContext.Provider
       value={{
+        userData,
         loggedIn,
         loading,
         saveLoginData,
