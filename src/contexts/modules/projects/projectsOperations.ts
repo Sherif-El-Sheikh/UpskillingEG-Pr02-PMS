@@ -10,27 +10,33 @@ const useProjectsOperations = () => {
 
   // CRUD operations
   // 1.1 Get all projects in the system
-  const getProjects = async (
-    pageNumber: number,
-    pageSize: number,
-    title: string
+  const getAllProjects = async (
+    pageNumber?: number,
+    pageSize?: number,
+    title?: string
   ) => {
     try {
       dispatch({ type: 'SET_LOADING', payload: true })
       const response = await apiProtected.get('/Project', {
         params: { pageNumber, pageSize, title },
       })
-      dispatch({ type: 'GET_PROJECTS_SUCCESS', payload: response.data })
+      dispatch({ type: 'GET_ALL_PROJECTS_SUCCESS', payload: response.data })
     } catch (error: any) {
       dispatch({ type: 'SET_LOADING', payload: false })
       toast.error(`Error fetching projects - ${error.response.data.message}`)
     }
   }
   // 1.2 Get all projects for manager
-  const getManagerProjects = async () => {
+  const getManagerProjects = async (
+    pageNumber?: number,
+    pageSize?: number,
+    title?: string
+  ) => {
     try {
       dispatch({ type: 'SET_LOADING', payload: true })
-      const response = await apiProtected.get('/Project/manager')
+      const response = await apiProtected.get('/Project/manager', {
+        params: { pageNumber, pageSize, title },
+      })
       dispatch({ type: 'GET_MANAGER_PROJECTS_SUCCESS', payload: response.data })
     } catch (error: any) {
       dispatch({ type: 'SET_LOADING', payload: false })
@@ -38,10 +44,16 @@ const useProjectsOperations = () => {
     }
   }
   // 1.3 Get all projects for employee
-  const getEmployeeProjects = async () => {
+  const getEmployeeProjects = async (
+    pageNumber?: number,
+    pageSize?: number,
+    title?: string
+  ) => {
     try {
       dispatch({ type: 'SET_LOADING', payload: true })
-      const response = await apiProtected.get('/Project/employee')
+      const response = await apiProtected.get('/Project/employee', {
+        params: { pageNumber, pageSize, title },
+      })
       dispatch({
         type: 'GET_EMPLOYEE_PROJECTS_SUCCESS',
         payload: response.data,
@@ -141,7 +153,7 @@ const useProjectsOperations = () => {
   }
 
   return {
-    getProjects,
+    getAllProjects,
     getManagerProjects,
     getEmployeeProjects,
     getProjectById,

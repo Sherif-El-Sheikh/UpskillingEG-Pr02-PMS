@@ -1,4 +1,3 @@
-
 // react-router-dom
 import {
   Route,
@@ -31,7 +30,7 @@ function App() {
   // auth context
   const { loggedIn, saveLoginData } = useAuthContext()
   useEffect(() => {
-    console.log('App mounted', loggedIn)
+    // console.log('App mounted', loggedIn)
 
     saveLoginData()
     // eslint-disable-next-line react-hooks/exhaustive-deps

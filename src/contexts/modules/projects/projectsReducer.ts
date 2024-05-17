@@ -1,14 +1,36 @@
 // Types
-import { GeneralProject } from '../../../types/Project'
+import { Project } from '../../../types/Project'
 
-interface Action {
+export interface Action {
   type: string
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   payload: any
 }
+export interface State {
+  projects: Project[]
+  managerProjects: Project[]
+  employeeProjects: Project[]
+  selectedProject: object
+  loading: boolean
+  pageNumber: number
+  pageSize: number
+  title: string
+  totalNumberOfRecords: number
+  totalNumberOfPages: number
+  managerPageNumber: number
+  managerPageSize: number
+  managerTitle: string
+  managerTotalNumberOfRecords: number
+  managerTotalNumberOfPages: number
+  employeePageNumber: number
+  employeePageSize: number
+  employeeTitle: string
+  employeeTotalNumberOfRecords: number
+  employeeTotalNumberOfPages: number
+}
 
 // initial state
-export const initialState = {
+export const initialState: State = {
   projects: [],
   managerProjects: [],
   employeeProjects: [],
@@ -35,7 +57,7 @@ export const initialState = {
 }
 
 // Reducer function
-export const projectsReducer = (state: typeof initialState, action: Action) => {
+export const projectsReducer = (state: State, action: Action) => {
   switch (action.type) {
     // Loading
     case 'SET_LOADING':
@@ -54,7 +76,7 @@ export const projectsReducer = (state: typeof initialState, action: Action) => {
     case 'GET_MANAGER_PROJECTS_SUCCESS':
       return {
         ...state,
-        managerProjects: action.payload,
+        managerProjects: action.payload.data,
         loading: false,
         managerTotalNumberOfRecords: action.payload.totalNumberOfRecords,
         managerTotalNumberOfPages: action.payload.totalNumberOfPages,
@@ -63,7 +85,7 @@ export const projectsReducer = (state: typeof initialState, action: Action) => {
     case 'GET_EMPLOYEE_PROJECTS_SUCCESS':
       return {
         ...state,
-        employeeProjects: action.payload,
+        employeeProjects: action.payload.data,
         loading: false,
         employeeTotalNumberOfRecords: action.payload.totalNumberOfRecords,
         employeeTotalNumberOfPages: action.payload.totalNumberOfPages,
@@ -80,13 +102,17 @@ export const projectsReducer = (state: typeof initialState, action: Action) => {
       return {
         ...state,
         projects: [action.payload, ...state.projects],
+        managerProjects: [action.payload, ...state.managerProjects],
         loading: false,
       }
 
     case 'UPDATE_PROJECT_SUCCESS':
       return {
         ...state,
-        projects: state.projects.map((project: GeneralProject) =>
+        projects: state.projects.map((project: Project) =>
+          project.id === action.payload.id ? action.payload : project
+        ),
+        managerProjects: state.managerProjects.map((project: Project) =>
           project.id === action.payload.id ? action.payload : project
         ),
         loading: false,
@@ -96,7 +122,10 @@ export const projectsReducer = (state: typeof initialState, action: Action) => {
       return {
         ...state,
         projects: state.projects.filter(
-          (project: GeneralProject) => project.id !== action.payload
+          (project: Project) => project.id !== action.payload
+        ),
+        managerProjects: state.managerProjects.filter(
+          (project: Project) => project.id !== action.payload
         ),
         loading: false,
       }

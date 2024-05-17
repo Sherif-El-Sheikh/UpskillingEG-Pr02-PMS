@@ -1,11 +1,12 @@
 // from getAllProjects endpoint
-export interface GeneralProject {
+export interface Project {
   id: number
   title: string
   description: string
   creationDate: Date
   modificationDate: Date
-  manager: Manager
+  manager?: Manager
+  task?: Task[]
 }
 export interface Manager {
   id: number
@@ -22,20 +23,11 @@ export interface Manager {
   modificationDate: Date
 }
 
-// // from getManagerProjects endpoint
-// export interface ManagerProject {
-//   id: number
-//   title: string
-//   description: string
-//   creationDate: Date
-//   modificationDate: Date
-//   task?: Task
-// }
-// export interface Task {
-//   id: number
-//   title: string
-//   description: string
-//   creationDate: Date
-//   modificationDate: Date
-//   status: string
-// }
+export interface Task {
+  id: number
+  title: string
+  description: string
+  creationDate: Date
+  modificationDate: Date
+  status: string
+}
