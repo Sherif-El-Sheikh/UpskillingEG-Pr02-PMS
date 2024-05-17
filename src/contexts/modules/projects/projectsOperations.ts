@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useProjectsContext } from './projectsContext'
 import { apiProtected } from '../../../utils/api'
-// import { Project } from '../../../types'
 import { toast } from 'react-toastify'
 
 const useProjectsOperations = () => {

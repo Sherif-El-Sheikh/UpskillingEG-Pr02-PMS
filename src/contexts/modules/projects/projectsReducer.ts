@@ -1,12 +1,8 @@
 // Types
-import { Project } from '../../../types/interfaces'
+import { Project, Action } from '../../../types/interfaces'
 
-export interface Action {
-  type: string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  payload: any
-}
-export interface State {
+
+interface State {
   projects: Project[]
   managerProjects: Project[]
   employeeProjects: Project[]
