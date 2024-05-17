@@ -8,6 +8,7 @@ import LoadingScreen from './LoadingScreen'
 import DataTable from './DataTable'
 import TableImg from './TableImg'
 import NoData from './NoData'
+import CustomPagination from './CustomPagination'
 
 export {
   AuthForm,
@@ -20,4 +21,5 @@ export {
   DataTable,
   TableImg,
   NoData,
+  CustomPagination,
 }
