@@ -7,5 +7,17 @@ import ChangePass from './ChangePass'
 import LoadingScreen from './LoadingScreen'
 import DataTable from './DataTable'
 import TableImg from './TableImg'
+import NoData from './NoData'
 
-export { AuthForm, LoadingSpinner, SideBar, Navbar, RouteGuard, ChangePass, LoadingScreen, DataTable, TableImg}
+export {
+  AuthForm,
+  LoadingSpinner,
+  SideBar,
+  Navbar,
+  RouteGuard,
+  ChangePass,
+  LoadingScreen,
+  DataTable,
+  TableImg,
+  NoData,
+}
