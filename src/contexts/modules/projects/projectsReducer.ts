@@ -1,5 +1,5 @@
 // Types
-import { Project } from '../../../types/Project'
+import { Project } from '../../../types/interfaces'
 
 export interface Action {
   type: string
