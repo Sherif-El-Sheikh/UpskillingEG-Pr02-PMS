@@ -54,6 +54,8 @@ function App() {
         >
 
           <Route index element={<Home />} />
+          <Route path='addtask' element={<AddTask />} />
+
         </Route>
 
         {/* ------------ Auth Layout ------------ */}
