@@ -5,13 +5,13 @@ import {
   RouterProvider,
   Route,
   createRoutesFromElements,
-} from 'react-router-dom'
+} from "react-router-dom";
 // react-toastify
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-import { useContext, useEffect } from 'react'
-import { AuthContext, AuthContextType } from './contexts/AuthContext'
+import { useContext, useEffect } from "react";
+import { AuthContext, AuthContextType } from "./contexts/AuthContext";
 
 // Pages
 import {
@@ -20,22 +20,26 @@ import {
   ForgotPassPage,
   VerifyPassPage,
   ResetPassPage,
-} from './pages/Auth'
-import { Home } from './pages/Dashboard'
+} from "./pages/Auth";
+import { Home } from "./pages/Dashboard";
 // RouteGuard and Layouts
-import { RouteGuard } from './components/shared'
-import { MasterLayout, AuthLayoutWrapper } from './layouts'
-import Notfound from './pages/Notfound/Notfound'
+import { RouteGuard } from "./components/shared";
+import { MasterLayout, AuthLayoutWrapper } from "./layouts";
+import Notfound from "./pages/Notfound/Notfound";
+import React from "react";
+import Tasks from "./pages/Dashboard/Task";
 
 function App() {
   // auth context
-  const { loggedIn, saveLoginData } = useContext(AuthContext) as AuthContextType
+  const { loggedIn, saveLoginData } = useContext(
+    AuthContext
+  ) as AuthContextType;
   useEffect(() => {
-    console.log('App mounted', loggedIn);
-    
-    saveLoginData()
+    console.log("App mounted", loggedIn);
+
+    saveLoginData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loggedIn])
+  }, [loggedIn]);
 
   // router
   const router = createBrowserRouter(
@@ -43,48 +47,45 @@ function App() {
       <>
         {/* ------------ Master Layout ------------ */}
         <Route
-          path='/dashboard'
+          path="/dashboard"
           element={
-            <RouteGuard redirectPath='/login' isAllowed={loggedIn}>
+            <RouteGuard redirectPath="/login" isAllowed={loggedIn}>
               <MasterLayout />
             </RouteGuard>
-        
           }
-          errorElement={<Notfound/>}
+          errorElement={<Notfound />}
         >
-
           <Route index element={<Home />} />
+          <Route path="tasks" element={<Tasks />} />
         </Route>
 
         {/* ------------ Auth Layout ------------ */}
         <Route
-          path='/'
+          path="/"
           element={
-            <RouteGuard redirectPath='/dashboard' isAllowed={!loggedIn}>
+            <RouteGuard redirectPath="/dashboard" isAllowed={!loggedIn}>
               <AuthLayoutWrapper />
             </RouteGuard>
           }
-          errorElement={<Notfound/>}
+          errorElement={<Notfound />}
         >
           <Route index element={<LoginPage />} />
-          <Route path='login' element={<LoginPage />} />
-          <Route path='register' element={<RegisterPage />} />
-          <Route path='forgot-password' element={<ForgotPassPage />} />
-          <Route path='verify-password' element={<VerifyPassPage />} />
-          <Route path='reset-password' element={<ResetPassPage />} />
-        
+          <Route path="login" element={<LoginPage />} />
+          <Route path="register" element={<RegisterPage />} />
+          <Route path="forgot-password" element={<ForgotPassPage />} />
+          <Route path="verify-password" element={<VerifyPassPage />} />
+          <Route path="reset-password" element={<ResetPassPage />} />
         </Route>
-
       </>,
     ])
-  )
+  );
 
   return (
     <>
       <ToastContainer />
       <RouterProvider router={router} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
