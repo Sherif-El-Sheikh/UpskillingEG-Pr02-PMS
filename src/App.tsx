@@ -1,10 +1,5 @@
 // react-router-dom
-import {
-  Route,
-  RouterProvider,
-  createBrowserRouter,
-  createRoutesFromElements,
-} from 'react-router-dom'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 // react-toastify
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -37,48 +32,70 @@ function App() {
   }, [loggedIn])
 
   // router
-  const router = createBrowserRouter(
-    createRoutesFromElements([
-      <>
-        {/* ------------ Master Layout ------------ */}
-        <Route
-          path='/dashboard'
-          element={
-            <RouteGuard redirectPath='/login' isAllowed={loggedIn}>
-              <MasterLayout />
-            </RouteGuard>
-          }
-          errorElement={<Notfound />}
-        >
-          <Route index element={<Home />} />
-
-          <Route path='Home' element={<Home />} />
-          <Route path='Users' element={<Users />} />
-          <Route path='Projects' element={<Projects />} />
-          <Route path='Tasks' element={<Tasks />} />
-        </Route>
-
-        {/* ------------ Auth Layout ------------ */}
-        <Route
-          path='/'
-          element={
-            <RouteGuard redirectPath='/dashboard' isAllowed={!loggedIn}>
-              <AuthLayoutWrapper />
-            </RouteGuard>
-          }
-          errorElement={<Notfound />}
-        >
-          <Route index element={<LoginPage />} />
-          <Route path='login' element={<LoginPage />} />
-          <Route path='register' element={<RegisterPage />} />
-          <Route path='forgot-password' element={<ForgotPassPage />} />
-          <Route path='verify-password' element={<VerifyPassPage />} />
-          <Route path='reset-password' element={<ResetPassPage />} />
-        </Route>
-      </>,
-    ])
-  )
-
+  const router = createBrowserRouter([
+    {
+      path: '/dashboard',
+      element: (
+        <RouteGuard redirectPath='/login' isAllowed={loggedIn}>
+          <MasterLayout />
+        </RouteGuard>
+      ),
+      errorElement: <Notfound />,
+      children: [
+        {
+          index: true,
+          element: <Home />,
+        },
+        {
+          path: 'projects',
+          element: <Projects />,
+        },
+        {
+          path: 'tasks',
+          element: <Tasks />,
+        },
+        {
+          path: 'users',
+          element: <Users />,
+        },
+      ],
+    },
+    {
+      path: '/',
+      element: (
+        <RouteGuard redirectPath='/dashboard' isAllowed={!loggedIn}>
+          <AuthLayoutWrapper />
+        </RouteGuard>
+      ),
+      errorElement: <Notfound />,
+      children: [
+        {
+          index: true,
+          element: <LoginPage />,
+        },
+        {
+          path: 'login',
+          element: <LoginPage />,
+        },
+        {
+          path: 'register',
+          element: <RegisterPage />,
+        },
+        {
+          path: 'forgot-password',
+          element: <ForgotPassPage />,
+        },
+        {
+          path: 'verify-password',
+          element: <VerifyPassPage />,
+        },
+        {
+          path: 'reset-password',
+          element: <ResetPassPage />,
+        },
+      ],
+    },
+  ])
   return (
     <>
       <ToastContainer />
