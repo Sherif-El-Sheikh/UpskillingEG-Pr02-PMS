@@ -20,7 +20,7 @@ import {
   VerifyPassPage,
   ResetPassPage,
 } from './pages/Auth'
-import { Home } from './pages/Dashboard'
+import { Home, ProjectDetails, Projects } from './pages/Dashboard'
 // RouteGuard and Layouts
 import { RouteGuard } from './components/shared'
 import { MasterLayout, AuthLayoutWrapper } from './layouts'
@@ -53,6 +53,9 @@ function App() {
         >
 
           <Route index element={<Home />} />
+          <Route path='projects' element={<Projects />} />
+          <Route path='projectde/:id' element={<ProjectDetails />} />
+
         </Route>
 
         {/* ------------ Auth Layout ------------ */}
