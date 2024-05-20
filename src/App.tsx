@@ -1,11 +1,12 @@
 // react-router-dom
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 // react-toastify
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { useEffect } from 'react'
 import { useAuthContext } from './contexts/global/AuthContext'
+
 
 // Pages
 import {
@@ -13,6 +14,7 @@ import {
   LoginPage,
   RegisterPage,
   ResetPassPage,
+
   VerifyPassPage,
 } from './pages/Auth'
 import { Home, Projects, Tasks, Users } from './pages/Dashboard'
@@ -28,10 +30,12 @@ function App() {
     // console.log('App mounted', loggedIn)
 
     saveLoginData()
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loggedIn])
+  }, [loggedIn]);
 
   // router
+
 
   const router = createBrowserRouter([
     {
@@ -98,12 +102,13 @@ function App() {
     },
   ])
 
+
   return (
     <>
       <ToastContainer />
       <RouterProvider router={router} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
