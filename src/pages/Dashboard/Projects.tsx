@@ -11,8 +11,7 @@ import {
 import { FaEye, FaEdit, FaTrashAlt, FaSearch } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 // Model Delete
-import Button from 'react-bootstrap/Button'
-import Modal from 'react-bootstrap/Modal'
+import { Modal, Button } from 'react-bootstrap'
 import deleteAvatar from '../../assets/images/no-data.png'
 
 function Projects() {

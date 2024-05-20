@@ -1,20 +1,28 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { CustomPagination, DataTable, NoData } from '../../components/shared'
 import { useTasksContext } from '../../contexts/modules/tasks/tasksContext'
 import useTasksOperations from '../../contexts/modules/tasks/tasksOperations'
 
 // icons
+import { FaEdit, FaEye, FaTrashAlt } from 'react-icons/fa'
 import { IoFilterOutline } from 'react-icons/io5'
-import { FaEye, FaEdit, FaTrashAlt } from 'react-icons/fa'
 
-import { Link } from 'react-router-dom'
+// Model Delete
+import { Modal, Button } from 'react-bootstrap'
+import deleteAvatar from '../../assets/images/no-data.png'
 
 function Tasks() {
+  // Modal
+  const [showDelete, setShowDelete] = useState(false)
+  const [taskToDeleteId, setTaskToDeleteId] = useState(0)
+
   const {
     setManagerTasksPagination,
     setManagerTasksTitleFilter,
     getManagerTasks,
+    deleteTask,
   } = useTasksOperations()
 
   const { state: taskState } = useTasksContext()
@@ -32,6 +40,23 @@ function Tasks() {
     taskState.managerTitle,
     taskState.managerStatus,
   ])
+
+  // Model Delete
+  const handleDeleteClose = () => setShowDelete(false)
+  const handleDeleteShow = (id: number) => {
+    setTaskToDeleteId(id)
+    setShowDelete(true)
+  }
+  const handleDeleteTask = (id) => {
+    deleteTask(id)
+    getManagerTasks(
+      taskState.managerPageNumber,
+      taskState.managerPageSize,
+      taskState.managerTitle,
+      taskState.managerStatus
+    )
+    handleDeleteClose()
+  }
 
   const columns = ['Title', 'Status', 'User', 'Project', 'Date']
 
@@ -81,7 +106,7 @@ function Tasks() {
                       <FaTrashAlt
                         className='text-danger cursor-pointer'
                         size={14}
-                        // onClick={() => handleDeleteShow(task.id)}
+                        onClick={() => handleDeleteShow(task.id)}
                       />
                       <Link to={`/dashboard/task/${task.id}`}>
                         <FaEye className='text-success cursor-pointer' />
@@ -108,6 +133,36 @@ function Tasks() {
           />
         )}
       </div>
+
+      {/*  Model Delete */}
+      <Modal centered show={showDelete} onHide={handleDeleteClose}>
+        <Modal.Header closeButton>
+          <h3 className='modalTitle'>Delete Task {`#${taskToDeleteId}`}</h3>
+        </Modal.Header>
+        <Modal.Body>
+          <div className='text-center deleteData'>
+            <img
+              src={deleteAvatar}
+              className='img-fluid mb-3'
+              alt='delete Avatar'
+            />
+            <h6 className='mb-2'>
+              Are you sure you want to delete this item ?
+            </h6>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant='danger'
+            onClick={() => {
+              handleDeleteTask(taskToDeleteId)
+            }}
+            className='delete'
+          >
+            Delete this item
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   )
 }
