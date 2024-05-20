@@ -14,10 +14,9 @@ import {
   LoginPage,
   RegisterPage,
   ResetPassPage,
-
   VerifyPassPage,
 } from './pages/Auth'
-import { Home, Projects, Tasks, Users } from './pages/Dashboard'
+import { Home, Projects, ProjectDetails, Tasks, Users } from './pages/Dashboard'
 // RouteGuard and Layouts
 import { RouteGuard } from './components/shared'
 import { AuthLayoutWrapper, MasterLayout } from './layouts'
@@ -35,8 +34,6 @@ function App() {
   }, [loggedIn]);
 
   // router
-
-
   const router = createBrowserRouter([
     {
       path: '/dashboard',
@@ -63,6 +60,10 @@ function App() {
           path: 'users',
           element: <Users />,
         },
+        {
+          path: 'projectde/:id',
+          element: <ProjectDetails />
+        }
       ],
     },
     {
