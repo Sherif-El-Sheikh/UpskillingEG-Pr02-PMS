@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-
 import { useEffect, useState } from 'react'
 import { useProjectsContext } from '../../contexts/modules/projects/projectsContext'
 import useProjectsOperations from '../../contexts/modules/projects/projectsOperations'
