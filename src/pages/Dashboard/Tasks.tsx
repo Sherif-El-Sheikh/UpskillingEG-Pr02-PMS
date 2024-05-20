@@ -6,7 +6,7 @@ import { useTasksContext } from '../../contexts/modules/tasks/tasksContext'
 import useTasksOperations from '../../contexts/modules/tasks/tasksOperations'
 
 // icons
-import { FaEdit, FaEye, FaTrashAlt } from 'react-icons/fa'
+import { FaEdit,  FaTrashAlt } from 'react-icons/fa'
 import { IoFilterOutline } from 'react-icons/io5'
 
 // Model Delete
@@ -108,9 +108,9 @@ function Tasks() {
                         size={14}
                         onClick={() => handleDeleteShow(task.id)}
                       />
-                      <Link to={`/dashboard/task/${task.id}`}>
+                      {/* <Link to={`/dashboard/task/${task.id}`}>
                         <FaEye className='text-success cursor-pointer' />
-                      </Link>
+                      </Link> */}
                     </div>
                   </td>
                 </tr>

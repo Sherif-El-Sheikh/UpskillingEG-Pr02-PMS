@@ -80,7 +80,7 @@ function Projects() {
                       role='button'
                       className=' d-flex justify-content-center align-items-center gap-2 '
                     >
-                      <Link to={`/dashboard/editPoject/${project.id}`}>
+                      <Link to={`/dashboard/editProject/${project.id}`}>
                         <FaEdit className='text-warning cursor-pointer' />
                       </Link>
                       <FaTrashAlt

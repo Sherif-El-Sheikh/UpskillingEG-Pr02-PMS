@@ -1,12 +1,11 @@
 // react-router-dom
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 // react-toastify
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 import { useEffect } from 'react'
 import { useAuthContext } from './contexts/global/AuthContext'
-
 
 // Pages
 import {
@@ -16,7 +15,17 @@ import {
   ResetPassPage,
   VerifyPassPage,
 } from './pages/Auth'
-import { Home, Projects, ProjectDetails, Tasks, Users, AddTask, EditTask } from './pages/Dashboard'
+import {
+  Home,
+  Projects,
+  ProjectDetails,
+  Tasks,
+  Users,
+  AddTask,
+  EditTask,
+  AddProject,
+  EditProject,
+} from './pages/Dashboard'
 // RouteGuard and Layouts
 import { RouteGuard } from './components/shared'
 import { AuthLayoutWrapper, MasterLayout } from './layouts'
@@ -31,7 +40,7 @@ function App() {
     saveLoginData()
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loggedIn]);
+  }, [loggedIn])
 
   // router
   const router = createBrowserRouter([
@@ -66,12 +75,20 @@ function App() {
         },
         {
           path: 'editTask/:id',
-          element: <EditTask />
+          element: <EditTask />,
+        },
+        {
+          path: 'addProject',
+          element: <AddProject />,
+        },
+        {
+          path: 'editProject/:id',
+          element: <EditProject />,
         },
         {
           path: 'project/:id',
-          element: <ProjectDetails />
-        }
+          element: <ProjectDetails />,
+        },
       ],
     },
     {
@@ -111,13 +128,12 @@ function App() {
     },
   ])
 
-
   return (
     <>
       <ToastContainer />
       <RouterProvider router={router} />
     </>
-  );
+  )
 }
 
-export default App;
+export default App
