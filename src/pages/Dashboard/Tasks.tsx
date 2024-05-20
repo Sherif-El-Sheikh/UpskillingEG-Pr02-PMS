@@ -47,8 +47,8 @@ function Tasks() {
     setTaskToDeleteId(id)
     setShowDelete(true)
   }
-  const handleDeleteTask = (id) => {
-    deleteTask(id)
+  const handleDeleteTask = async (id: number) => {
+    await deleteTask(id)
     getManagerTasks(
       taskState.managerPageNumber,
       taskState.managerPageSize,
