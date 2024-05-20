@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { useListsForForms } from '../../../contexts/global/ListsForForms'
 import useTasksOperations from '../../../contexts/modules/tasks/tasksOperations'
-import './../styles/add-edit-Form.css'
 
 type FormData = {
   title: string
@@ -98,29 +97,23 @@ const AddEditForm: React.FC = () => {
           </div>
         </div>
 
-        <div className='row mt-3'>
-          <div className='col-md-6'>
-            <Button
-              className='w-100 py-2 text-center rounded-5'
-              variant='light'
+        <div className='mt-5 pt-4 border-top d-flex justify-content-between'>
+          <Button className='px-4 py-2 rounded-5' variant='outline-dark'>
+            <Link
+              className='text-reset text-decoration-none'
+              to='/dashboard/tasks'
             >
-              <Link
-                className='text-reset text-decoration-none'
-                to='/dashboard/tasks'
-              >
-                Cancel
-              </Link>
-            </Button>
-          </div>
-          <div className='col-md-6'>
-            <Button
-              type='submit'
-              className='w-100 py-2 text-center rounded-5'
-              variant='warning'
-            >
-              Save
-            </Button>
-          </div>
+              Cancel
+            </Link>
+          </Button>
+
+          <Button
+            type='submit'
+            className='submit-btn px-4 py-2 rounded-5 text-white text-decoration-none'
+            variant='link'
+          >
+            Save
+          </Button>
         </div>
       </Form>
     </div>
