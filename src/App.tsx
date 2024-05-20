@@ -16,7 +16,7 @@ import {
   ResetPassPage,
   VerifyPassPage,
 } from './pages/Auth'
-import { Home, Projects, ProjectDetails, Tasks, Users } from './pages/Dashboard'
+import { Home, Projects, ProjectDetails, Tasks, Users, AddTask } from './pages/Dashboard'
 // RouteGuard and Layouts
 import { RouteGuard } from './components/shared'
 import { AuthLayoutWrapper, MasterLayout } from './layouts'
@@ -59,6 +59,10 @@ function App() {
         {
           path: 'users',
           element: <Users />,
+        },
+        {
+          path: 'addTask',
+          element: <AddTask />,
         },
         {
           path: 'projectde/:id',

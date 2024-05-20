@@ -85,7 +85,7 @@ function Projects() {
                       className='text-danger cursor-pointer'
                       onClick={()=> handleDeleteShow(project.id)}
                     />
-                    <Link to={/dashboard/projectde/${project.id}}>
+                    <Link to={`/dashboard/projectde/${project.id}`}>
                     <FaEye
                       fontSize={24}
                       className='text-info cursor-pointer'
