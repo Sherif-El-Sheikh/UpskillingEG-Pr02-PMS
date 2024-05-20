@@ -10,6 +10,7 @@ import TableImg from './TableImg'
 import NoData from './NoData'
 import CustomPagination from './CustomPagination'
 import AddEditTasksForm from './Form/AddEditTaskForm'
+import Header from './Header'
 
 export {
   AuthForm,
@@ -24,4 +25,5 @@ export {
   NoData,
   CustomPagination,
   AddEditTasksForm,
+  Header,
 }

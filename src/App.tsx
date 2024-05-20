@@ -16,7 +16,7 @@ import {
   ResetPassPage,
   VerifyPassPage,
 } from './pages/Auth'
-import { Home, Projects, ProjectDetails, Tasks, Users, AddTask } from './pages/Dashboard'
+import { Home, Projects, ProjectDetails, Tasks, Users, AddTask, EditTask } from './pages/Dashboard'
 // RouteGuard and Layouts
 import { RouteGuard } from './components/shared'
 import { AuthLayoutWrapper, MasterLayout } from './layouts'
@@ -63,6 +63,10 @@ function App() {
         {
           path: 'addTask',
           element: <AddTask />,
+        },
+        {
+          path: 'editTask/:id',
+          element: <EditTask />
         },
         {
           path: 'project/:id',

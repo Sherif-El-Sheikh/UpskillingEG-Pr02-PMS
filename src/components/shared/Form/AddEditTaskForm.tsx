@@ -19,7 +19,7 @@ interface AddEditTasksFormProps {
   task?: Task
 }
 
-const AddEditTasksForm: React.FC = ({ task }: AddEditTasksFormProps) => {
+const AddEditTasksForm = ({ task }: AddEditTasksFormProps) => {
   const naviate = useNavigate()
   const { allProjects, allUsers } = useListsForForms()
   const { createTask, updateTask } = useTasksOperations() // Destructure the createTask function from useTasksOperations

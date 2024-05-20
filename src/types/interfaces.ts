@@ -15,7 +15,7 @@ export interface Task {
   description: string
   creationDate: string
   modificationDate: string
-  status: 'ToDo' | 'InProgress' | 'Done'
+  status?: 'ToDo' | 'InProgress' | 'Done'
   project?: Project
   employee?: Employee
 }
