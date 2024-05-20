@@ -32,6 +32,7 @@ function App() {
   }, [loggedIn])
 
   // router
+
   const router = createBrowserRouter([
     {
       path: '/dashboard',
@@ -96,6 +97,7 @@ function App() {
       ],
     },
   ])
+
   return (
     <>
       <ToastContainer />
