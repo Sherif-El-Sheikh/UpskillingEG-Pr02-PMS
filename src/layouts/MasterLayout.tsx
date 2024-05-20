@@ -11,7 +11,7 @@ const MasterLayout = () => {
         <div className=''>
           <SideBar />
         </div>
-        <div className='content w-75 pt-5'>
+        <div className='content w-100'>
           <Outlet />
         </div>
       </div>

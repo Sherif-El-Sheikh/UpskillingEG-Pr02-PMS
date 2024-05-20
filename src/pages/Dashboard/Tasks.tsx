@@ -5,9 +5,9 @@ import { useTasksContext } from '../../contexts/modules/tasks/tasksContext'
 import useTasksOperations from '../../contexts/modules/tasks/tasksOperations'
 
 // icons
-import { CiEdit } from 'react-icons/ci'
 import { IoFilterOutline } from 'react-icons/io5'
-import { MdDeleteOutline } from 'react-icons/md'
+import { FaEye, FaEdit, FaTrashAlt, FaSearch } from 'react-icons/fa'
+
 import { Link } from 'react-router-dom'
 
 function Tasks() {
@@ -37,13 +37,16 @@ function Tasks() {
 
   return (
     <>
-      <div className='header d-flex justify-content-between align-items-center p-4 bg-white pb-5'>
-        <h1>Tasks</h1>
-        <Link className='btn submit-btn rounded-5 text-white' to={'/dashboard/addTask'}>
+      <div className='d-flex justify-content-between align-items-center bg-white shadow-sm p-3 '>
+        <h2>Tasks</h2>
+        <Link
+          className='btn submit-btn px-3 rounded-5 text-white'
+          to={'/dashboard/addTask'}
+        >
           + Add New Task
         </Link>
       </div>
-      <div className='bg-white col-10 col-md-8 col-lg-11 me-auto ms-auto shadow-lg mt-5 p-4 rounded-3'>
+      <div className='bg-white col-11 mx-auto shadow-lg mt-5 p-4 rounded-3'>
         <div className='d-flex align-items-center mb-5 gap-3'>
           <input
             type='text'
@@ -68,14 +71,20 @@ function Tasks() {
                   <td>{task.project?.title}</td>
                   <td>{new Date(task.creationDate).toLocaleDateString()}</td>
                   <td>
-                    <CiEdit
-                      fontSize={30}
-                      className='text-warning cursor-pointer'
-                    />
-                    <MdDeleteOutline
-                      fontSize={30}
-                      className='text-danger cursor-pointer'
-                    />
+                    <div
+                      role='button'
+                      className=' d-flex justify-content-center align-items-center gap-2 '
+                    >
+                      <FaEdit className='text-warning cursor-pointer' />
+                      <FaTrashAlt
+                        className='text-danger cursor-pointer'
+                        size={14}
+                        // onClick={() => handleDeleteShow(project.id)}
+                      />
+                      <Link to={`/dashboard/project/${task.id}`}>
+                        <FaEye className='text-success cursor-pointer' />
+                      </Link>
+                    </div>
                   </td>
                 </tr>
               ) : (
@@ -88,15 +97,13 @@ function Tasks() {
             </>
           ))}
         </DataTable>
-        {taskState.managerTotalNumberOfRecords > 10 ? (
+        {taskState.managerTotalNumberOfRecords > 10 && (
           <CustomPagination
             pageNumber={taskState.managerPageNumber}
             pageSize={taskState.managerPageSize}
             totalNumberOfRecords={taskState.managerTotalNumberOfRecords}
             setPagination={setManagerTasksPagination}
           />
-        ) : (
-          ''
         )}
       </div>
     </>

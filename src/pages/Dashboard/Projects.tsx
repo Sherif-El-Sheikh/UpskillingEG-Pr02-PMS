@@ -8,9 +8,7 @@ import {
   LoadingScreen,
 } from '../../components/shared'
 // icons
-import { CiEdit, CiSearch } from 'react-icons/ci'
-import { MdDeleteOutline } from 'react-icons/md'
-import { FaEye } from 'react-icons/fa'
+import { FaEye, FaEdit, FaTrashAlt, FaSearch } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 // Model Delete
 import Button from 'react-bootstrap/Button'
@@ -48,15 +46,18 @@ function Projects() {
   const columns = ['Title', 'Description', 'DreationDate']
   return (
     <>
-      <div className='header d-flex justify-content-between align-items-center p-4 bg-white pb-5 px-5'>
-        <h1 className=' ps-4'>Projects</h1>
-        <button className='btn  submit-btn w-25 me-4 h-25 rounded-4 text-white'>
+      <div className='d-flex justify-content-between align-items-center bg-white shadow-sm p-3 '>
+        <h2>Projects</h2>
+        <Link
+          className='btn submit-btn px-3 rounded-5 text-white'
+          to={'/dashboard/addProject'}
+        >
           + Add New Project
-        </button>
+        </Link>
       </div>
-      <div className=' bg-white col-10  col-md-8 col-lg-11 me-auto ms-auto shadow-lg mt-5 p-4 rounded-3'>
+      <div className=' bg-white col-11 mx-auto shadow-lg mt-5 p-4 rounded-3'>
         <div className=' position-relative'>
-          <CiSearch className=' position-absolute mt-3 ms-2' />
+          <FaSearch className=' position-absolute mt-3 ms-2' />
           <input
             type='text'
             className=' rounded-4 p-2 ps-5 form-check-input w-25 h-100 mb-5'
@@ -71,41 +72,38 @@ function Projects() {
                 <LoadingScreen />
               ) : (
                 <tr key={index}>
-                  <th>{++index}</th>
-                  <th>{project.title}</th>
-                  <th>{project.description}</th>
-                  <th>{new Date(project.creationDate).toLocaleDateString()}</th>
-                  <th className=' d-flex justify-content-center gap-3 '>
-                    <CiEdit
-                      fontSize={24}
-                      className='text-warning cursor-pointer'
-                    />
-                    <MdDeleteOutline
-                      fontSize={24}
-                      className='text-danger cursor-pointer'
-                      onClick={() => handleDeleteShow(project.id)}
-                    />
-                    <Link to={`/dashboard/project/${project.id}`}>
-                      <FaEye
-                        fontSize={24}
-                        className='text-info cursor-pointer'
+                  <td>{++index}</td>
+                  <td>{project.title}</td>
+                  <td>{project.description}</td>
+                  <td>{new Date(project.creationDate).toLocaleDateString()}</td>
+                  <td>
+                    <div
+                      role='button'
+                      className=' d-flex justify-content-center align-items-center gap-2 '
+                    >
+                      <FaEdit className='text-warning cursor-pointer' />
+                      <FaTrashAlt
+                        className='text-danger cursor-pointer'
+                        size={14}
+                        onClick={() => handleDeleteShow(project.id)}
                       />
-                    </Link>
-                  </th>
+                      <Link to={`/dashboard/project/${project.id}`}>
+                        <FaEye className='text-success cursor-pointer' />
+                      </Link>
+                    </div>
+                  </td>
                 </tr>
               )}
             </>
           ))}
         </DataTable>
-        {projectsState.totalNumberOfRecords > 10 ? (
+        {projectsState.totalNumberOfRecords > 10 && (
           <CustomPagination
             pageNumber={projectsState.pageNumber}
             pageSize={projectsState.pageSize}
             totalNumberOfRecords={projectsState.totalNumberOfRecords}
             setPagination={setManagerProjectsPagination}
           />
-        ) : (
-          ''
         )}
       </div>
       {/*  Model Delete */}
