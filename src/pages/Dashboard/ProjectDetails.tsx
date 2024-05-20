@@ -14,7 +14,7 @@ function ProjectDetails() {
   const { state: projectsState } = useProjectsContext()
 
   useEffect(() => {
-    getProjectById(projectId)
+    getProjectById(+projectId)
     console.log(projectsState.selectedProject)
   }, [projectId])
 
@@ -31,28 +31,17 @@ function ProjectDetails() {
         <h1>Project # {projectId} Details</h1>
         <div>
           <button className='btn bg-success text-white px-4 me-4'>
-            <CiEdit
-              className='me-2'
-              size={20}
-            />
+            <CiEdit className='me-2' size={20} />
             Edit
           </button>
           <button className='btn bg-danger text-white px-4'>
-            <MdDeleteOutline
-              className='me-2'
-              size={20}
-            />
+            <MdDeleteOutline className='me-2' size={20} />
             Delete
           </button>
         </div>
       </div>
       <div className='bg-white col-10  col-md-8 col-lg-11 me-auto ms-auto shadow-lg mt-5 p-4 rounded-3'>
-        <Table
-          striped
-          hover
-          borderless
-          responsive
-        >
+        <Table striped hover borderless responsive>
           <tbody>
             <>
               <tr>
@@ -64,7 +53,7 @@ function ProjectDetails() {
                 <td>{projectsState.selectedProject.description}</td>
               </tr>
               <tr>
-                <td>CreationDate</td>
+                <td>Date Created</td>
                 <td>
                   {new Date(
                     projectsState.selectedProject.creationDate
@@ -72,36 +61,45 @@ function ProjectDetails() {
                 </td>
               </tr>
               <tr>
-                <td>Managername</td>
+                <td>Manager</td>
                 <td>{projectsState.selectedProject.manager?.userName}</td>
               </tr>
               <tr>
-                <td>ManagerEmail</td>
+                <td>Manager Email</td>
                 <td>{projectsState.selectedProject.manager?.email}</td>
               </tr>
             </>
           </tbody>
         </Table>
-        
-        {projectsState.selectedProject.task &&  projectsState.selectedProject.task.length > 1 ? (
-          <>
-            
-            <h1 className='mt-3'>Tasks</h1>
-            <Card style={{ width: '18rem' }}>
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Subtitle className='mb-2 text-muted'>
-                 {projectsState.selectedProject.task[0].title}
-                </Card.Subtitle>
-                <Card.Text>
-                {projectsState.selectedProject.task[0].status}
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          </>
-        ) : (
-          ''
-        )}
+
+        <h1 className='mt-3'>Tasks</h1>
+        <div className='d-flex gap-2 flex-wrap '>
+          {projectsState.selectedProject.task &&
+          projectsState.selectedProject.task.length > 0 ? (
+            projectsState.selectedProject.task.map((task, index) => (
+              <Card key={index} style={{ width: '18rem' }}>
+                <Card.Body>
+                  <Card.Title>
+                    {'Task #'}
+                    {task.id}
+                    {' : '}
+                    {task.title}
+                  </Card.Title>
+                  <Card.Subtitle className='mb-2 text-muted'>
+                    {'Status: '}
+                    {task.status}
+                  </Card.Subtitle>
+                  <Card.Text>
+                    {'Description: '}
+                    {task.description}
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            ))
+          ) : (
+            <h6>This project has no tasks yet. </h6>
+          )}
+        </div>
       </div>
     </>
   )

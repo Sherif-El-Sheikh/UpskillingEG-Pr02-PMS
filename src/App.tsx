@@ -65,7 +65,7 @@ function App() {
           element: <AddTask />,
         },
         {
-          path: 'projectde/:id',
+          path: 'project/:id',
           element: <ProjectDetails />
         }
       ],

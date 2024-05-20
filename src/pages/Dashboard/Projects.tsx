@@ -10,7 +10,7 @@ import {
 // icons
 import { CiEdit, CiSearch } from 'react-icons/ci'
 import { MdDeleteOutline } from 'react-icons/md'
-import { FaEye } from "react-icons/fa";
+import { FaEye } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 // Model Delete
 import Button from 'react-bootstrap/Button'
@@ -18,13 +18,13 @@ import Modal from 'react-bootstrap/Modal'
 import deleteAvatar from '../../assets/images/no-data.png'
 
 function Projects() {
-  const [showDelete, setShowDelete] = useState(false);
-  const[projectsMangerId, setProjectsMangerId] = useState(0);
+  const [showDelete, setShowDelete] = useState(false)
+  const [projectsMangerId, setProjectsMangerId] = useState(0)
   const {
     getManagerProjects,
     setManagerProjectsPagination,
     setManagerProjectsTitleFilter,
-    deleteProject
+    deleteProject,
   } = useProjectsOperations()
   const { state: projectsState } = useProjectsContext()
   useEffect(() => {
@@ -39,12 +39,12 @@ function Projects() {
     projectsState.managerTitle,
   ])
   // Model Delete
-  const handleDeleteClose = () => setShowDelete(false);
-  const handleDeleteShow = (id: number) =>{
-    setProjectsMangerId(id);
-    setShowDelete(true);
-    }
-    
+  const handleDeleteClose = () => setShowDelete(false)
+  const handleDeleteShow = (id: number) => {
+    setProjectsMangerId(id)
+    setShowDelete(true)
+  }
+
   const columns = ['Title', 'Description', 'DreationDate']
   return (
     <>
@@ -83,13 +83,14 @@ function Projects() {
                     <MdDeleteOutline
                       fontSize={24}
                       className='text-danger cursor-pointer'
-                      onClick={()=> handleDeleteShow(project.id)}
+                      onClick={() => handleDeleteShow(project.id)}
                     />
-                    <Link to={`/dashboard/projectde/${project.id}`}>
-                    <FaEye
-                      fontSize={24}
-                      className='text-info cursor-pointer'
-                    /></Link>
+                    <Link to={`/dashboard/project/${project.id}`}>
+                      <FaEye
+                        fontSize={24}
+                        className='text-info cursor-pointer'
+                      />
+                    </Link>
                   </th>
                 </tr>
               )}
@@ -113,14 +114,28 @@ function Projects() {
           <h3 className='modalTitle'>Delete Project</h3>
         </Modal.Header>
         <Modal.Body>
-        <div className='text-center deleteData'>
-            <img src={deleteAvatar} className='img-fluid mb-3' alt="delete Avatar" />
+          <div className='text-center deleteData'>
+            <img
+              src={deleteAvatar}
+              className='img-fluid mb-3'
+              alt='delete Avatar'
+            />
             <h5 className='mb-2'>Delete This Project ?</h5>
-            <p>are you sure you want to delete this item ? if you are sure just click on delete it</p>
-        </div>
+            <p>
+              are you sure you want to delete this item ? if you are sure just
+              click on delete it
+            </p>
+          </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="danger" onClick={()=> {deleteProject(projectsMangerId), handleDeleteClose()}} className='delete'>Delete this item
+          <Button
+            variant='danger'
+            onClick={() => {
+              deleteProject(projectsMangerId), handleDeleteClose()
+            }}
+            className='delete'
+          >
+            Delete this item
           </Button>
         </Modal.Footer>
       </Modal>
