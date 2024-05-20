@@ -6,7 +6,7 @@ import useTasksOperations from '../../contexts/modules/tasks/tasksOperations'
 
 // icons
 import { IoFilterOutline } from 'react-icons/io5'
-import { FaEye, FaEdit, FaTrashAlt, FaSearch } from 'react-icons/fa'
+import { FaEye, FaEdit, FaTrashAlt } from 'react-icons/fa'
 
 import { Link } from 'react-router-dom'
 
@@ -75,13 +75,15 @@ function Tasks() {
                       role='button'
                       className=' d-flex justify-content-center align-items-center gap-2 '
                     >
-                      <FaEdit className='text-warning cursor-pointer' />
+                      <Link to={`/dashboard/editTask/${task.id}`}>
+                        <FaEdit className='text-warning cursor-pointer' />
+                      </Link>
                       <FaTrashAlt
                         className='text-danger cursor-pointer'
                         size={14}
-                        // onClick={() => handleDeleteShow(project.id)}
+                        // onClick={() => handleDeleteShow(task.id)}
                       />
-                      <Link to={`/dashboard/project/${task.id}`}>
+                      <Link to={`/dashboard/task/${task.id}`}>
                         <FaEye className='text-success cursor-pointer' />
                       </Link>
                     </div>

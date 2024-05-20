@@ -81,7 +81,9 @@ function Projects() {
                       role='button'
                       className=' d-flex justify-content-center align-items-center gap-2 '
                     >
-                      <FaEdit className='text-warning cursor-pointer' />
+                      <Link to={`/dashboard/editPoject/${project.id}`}>
+                        <FaEdit className='text-warning cursor-pointer' />
+                      </Link>
                       <FaTrashAlt
                         className='text-danger cursor-pointer'
                         size={14}
@@ -107,7 +109,7 @@ function Projects() {
         )}
       </div>
       {/*  Model Delete */}
-      <Modal show={showDelete} onHide={handleDeleteClose}>
+      <Modal centered show={showDelete} onHide={handleDeleteClose}>
         <Modal.Header closeButton>
           <h3 className='modalTitle'>Delete Project</h3>
         </Modal.Header>
@@ -118,11 +120,9 @@ function Projects() {
               className='img-fluid mb-3'
               alt='delete Avatar'
             />
-            <h5 className='mb-2'>Delete This Project ?</h5>
-            <p>
-              are you sure you want to delete this item ? if you are sure just
-              click on delete it
-            </p>
+            <h6 className='mb-2'>
+              Are you sure you want to delete this item ?
+            </h6>
           </div>
         </Modal.Body>
         <Modal.Footer>
