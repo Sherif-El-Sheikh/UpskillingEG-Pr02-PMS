@@ -1,0 +1,10 @@
+
+.add-edit-Form .butn button {
+  width: 40%;
+}
+
+@media (max-width: 875px) {
+  .add-edit-Form .butn button {
+    width: 100%;
+  }
+}
