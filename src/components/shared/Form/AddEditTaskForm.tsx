@@ -1,37 +1,55 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
-import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Form, Button } from 'react-bootstrap'
 import { useForm } from 'react-hook-form'
+import { Link, useNavigate } from 'react-router-dom'
 import { useListsForForms } from '../../../contexts/global/ListsForForms'
 import useTasksOperations from '../../../contexts/modules/tasks/tasksOperations'
+import { Task } from '../../../types/interfaces'
+import { LoadingSpinner } from '..'
 
 type FormData = {
   title: string
   description: string
-  employeeId: string
-  projectId: string
+  employeeId: number
+  projectId: number
 }
 
-const AddEditForm: React.FC = () => {
+interface AddEditTasksFormProps {
+  task?: Task
+}
+
+const AddEditTasksForm: React.FC = ({ task }: AddEditTasksFormProps) => {
+  const naviate = useNavigate()
   const { allProjects, allUsers } = useListsForForms()
-  const { createTask } = useTasksOperations() // Destructure the createTask function from useTasksOperations
+  const { createTask, updateTask } = useTasksOperations() // Destructure the createTask function from useTasksOperations
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     reset,
+    setValue,
   } = useForm<FormData>()
 
-  const onSubmit = handleSubmit((data) => {
-    createTask(data) // Use createTask function to handle form submission
-    reset() // Reset the form after submission
-  })
+  useEffect(() => {
+    if (task) {
+      setValue('title', task.title)
+      setValue('description', task.description)
+      task.employee && setValue('employeeId', task.employee.id)
+      task.project && setValue('projectId', task.project.id)
+    }
+  }, [task, setValue])
+
+  const onSubmit = async (data: FormData) => {
+    task ? await updateTask(data, task.id) : await createTask(data)
+    reset()
+    naviate('/dashboard/tasks')
+  }
 
   return (
     <div className='add-edit-Form container w-75 bg-white p-5 rounded-5'>
-      <Form onSubmit={onSubmit}>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <Form.Group className='mb-3' controlId='formTitle'>
           <Form.Label>Title</Form.Label>
           <Form.Control
@@ -111,8 +129,15 @@ const AddEditForm: React.FC = () => {
             type='submit'
             className='submit-btn px-4 py-2 rounded-5 text-white text-decoration-none'
             variant='link'
+            disabled={isSubmitting}
           >
-            Save
+            {isSubmitting ? (
+              <LoadingSpinner loadingTxt={task ? 'Updating' : 'Adding'} />
+            ) : task ? (
+              'Update Task'
+            ) : (
+              'Add Task'
+            )}
           </Button>
         </div>
       </Form>
@@ -120,4 +145,4 @@ const AddEditForm: React.FC = () => {
   )
 }
 
-export default AddEditForm
+export default AddEditTasksForm

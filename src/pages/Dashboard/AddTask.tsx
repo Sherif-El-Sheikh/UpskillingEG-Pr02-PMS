@@ -1,4 +1,4 @@
-import AddEditForm from '../../components/shared/Form/AddEditForm'
+import { AddEditTasksForm } from '../../components/shared'
 import Header from './../../components/shared/Header'
 import { FaAngleLeft } from 'react-icons/fa6'
 function AddTask() {
@@ -12,7 +12,7 @@ function AddTask() {
         />
       </div>
       <div className='container pt-5'>
-        <AddEditForm />
+        <AddEditTasksForm />
       </div>
     </>
   )
