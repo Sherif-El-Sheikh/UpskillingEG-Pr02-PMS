@@ -48,7 +48,7 @@ const AddEditTasksForm: React.FC = ({ task }: AddEditTasksFormProps) => {
   }
 
   return (
-    <div className='add-edit-Form container w-75 bg-white p-5 rounded-5'>
+    <div className='add-edit-Form container w-75 bg-white p-5 rounded-5 shadow-sm'>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Form.Group className='mb-3' controlId='formTitle'>
           <Form.Label>Title</Form.Label>
