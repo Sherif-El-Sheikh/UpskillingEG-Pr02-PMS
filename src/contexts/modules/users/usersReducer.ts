@@ -56,16 +56,16 @@ export function usersReducer(state: State, action: Action) {
 
     // Filter and Pagination operations
     case 'SET_USERNAME_FILTER':
-      return { ...state, userName: action.payload }
+      return { ...state, userNameFilter: action.payload }
 
     case 'SET_EMAIL_FILTER':
-      return { ...state, email: action.payload }
+      return { ...state, emailFilter: action.payload }
 
     case 'SET_COUNTRY_FILTER':
-      return { ...state, country: action.payload }
+      return { ...state, countryFilter: action.payload }
 
     case 'SET_GROUPS_FILTER':
-      return { ...state, groups: action.payload }
+      return { ...state, groupsFilter: action.payload }
 
     case 'SET_PAGINATION':
       return {

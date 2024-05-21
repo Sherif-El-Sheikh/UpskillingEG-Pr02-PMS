@@ -15,7 +15,7 @@ const useUsersOperations = () => {
     userName?: string,
     email?: string,
     country?: string,
-    groups?: string[]
+    groups?: string
   ) => {
     try {
       dispatch({ type: 'SET_LOADING', payload: true })
