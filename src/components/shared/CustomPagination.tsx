@@ -25,7 +25,7 @@ const CustomPagination = ({
 
   // Return the Pagination component
   return (
-    <Pagination className='d-flex justify-content-start '>
+    <Pagination className='d-flex justify-content-center mt-3 '>
       <Pagination.First
         onClick={() => setPagination(1, pageSize)}
         disabled={currentPage === 1}

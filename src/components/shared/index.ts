@@ -9,6 +9,9 @@ import DataTable from './DataTable'
 import TableImg from './TableImg'
 import NoData from './NoData'
 import CustomPagination from './CustomPagination'
+import AddEditTasksForm from './Form/AddEditTaskForm'
+import AddEditProjectForm from './Form/AddEditProjectForm'
+import Header from './Header'
 
 export {
   AuthForm,
@@ -22,4 +25,7 @@ export {
   TableImg,
   NoData,
   CustomPagination,
+  AddEditTasksForm,
+  AddEditProjectForm,
+  Header,
 }

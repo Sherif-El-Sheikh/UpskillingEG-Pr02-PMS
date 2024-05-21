@@ -49,7 +49,7 @@ const useTasksOperations = () => {
   }
 
   // 2. Get Task by ID
-  const getTaskById = async (id: number) => {
+  const getTaskById = async (id: string) => {
     try {
       dispatch({ type: 'SET_LOADING', payload: true })
       const response = await apiProtected.get(`/Task/${id}`)

@@ -15,7 +15,17 @@ import {
   ResetPassPage,
   VerifyPassPage,
 } from './pages/Auth'
-import { Home, Projects, Tasks, Users } from './pages/Dashboard'
+import {
+  Home,
+  Projects,
+  ProjectDetails,
+  Tasks,
+  Users,
+  AddTask,
+  EditTask,
+  AddProject,
+  EditProject,
+} from './pages/Dashboard'
 // RouteGuard and Layouts
 import { RouteGuard } from './components/shared'
 import { AuthLayoutWrapper, MasterLayout } from './layouts'
@@ -28,11 +38,11 @@ function App() {
     // console.log('App mounted', loggedIn)
 
     saveLoginData()
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loggedIn])
 
   // router
-
   const router = createBrowserRouter([
     {
       path: '/dashboard',
@@ -58,6 +68,26 @@ function App() {
         {
           path: 'users',
           element: <Users />,
+        },
+        {
+          path: 'addTask',
+          element: <AddTask />,
+        },
+        {
+          path: 'editTask/:id',
+          element: <EditTask />,
+        },
+        {
+          path: 'addProject',
+          element: <AddProject />,
+        },
+        {
+          path: 'editProject/:id',
+          element: <EditProject />,
+        },
+        {
+          path: 'project/:id',
+          element: <ProjectDetails />,
         },
       ],
     },

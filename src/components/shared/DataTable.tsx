@@ -24,14 +24,14 @@ const DataTable = ({ tableColumns, children }: DataTableProps) => {
         <Table striped hover borderless responsive className=' thead-color  '>
           <thead className=' '>
             <tr className=' h-md '>
-              <th className='w-10 align-middle thead-color text-light'>#</th>
+              <th className='align-middle thead-color text-light'>#</th>
               {tableColumns.map((column, index) => (
                 <th key={index} className='align-middle thead-color text-light'>
                   {column}
                   <LuChevronsUpDown className='m-1' fontSize={20} />
                 </th>
               ))}
-              <th className='w-10  align-middle thead-color text-light'>
+              <th className='w-10 text-center align-middle thead-color text-light'>
                 Actions
               </th>
             </tr>

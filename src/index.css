@@ -63,15 +63,15 @@ input:-webkit-autofill:active {
 form .field-name {
   color: #ef9b28;
 }
-.form-control {
+.auth-form .form-control {
   color: white !important;
 }
-.form-control::placeholder {
+.auth-form .form-control::placeholder {
   color: white !important;
   letter-spacing: 0.07rem !important;
   font-weight: 100 !important;
 }
-.form-control:focus {
+ .form-control:focus, .form-select:focus {
   outline: none !important;
   border: none !important;
   box-shadow: 0 0 0.25rem rgba(61, 124, 112, 0.9) !important;

@@ -5,7 +5,7 @@ interface State {
   managerTasks: Task[]
   employeeTasks: Task[]
   tasksInProject: Task[]
-  selectedTask: object
+  selectedTask: Task
   allTasksStats: object
   loading: boolean
   // Pagination and search filter for Manager tasks
@@ -36,7 +36,13 @@ export const initialState: State = {
   managerTasks: [],
   employeeTasks: [],
   tasksInProject: [],
-  selectedTask: {},
+  selectedTask: {
+    id: 0,
+    title: '',
+    description: '',
+    creationDate: '',
+    modificationDate: '',
+  },
   allTasksStats: {},
   loading: false,
   // Pagination and search filter for Manager tasks
