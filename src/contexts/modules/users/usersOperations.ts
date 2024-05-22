@@ -36,8 +36,12 @@ const useUsersOperations = () => {
       const response = await apiProtected.put(`/Users/${userId}`)
       const message = response.data.isActivated ? 'activated' : 'deactivated'
       const userName = response.data.userName
-      toast.success(`User : ${userName} is ${message} successfully`)
-      getAllUsers()
+      if (message == 'activated') {
+        toast.success(`User : "${userName}" is ${message} successfully`)
+      } else {
+        toast.warning(`User : "${userName}" is ${message} successfully`)
+      }
+      getAllUsers(1, 10)
       dispatch({ type: 'SET_LOADING', payload: false })
     } catch (error: any) {
       dispatch({ type: 'SET_LOADING', payload: false })
