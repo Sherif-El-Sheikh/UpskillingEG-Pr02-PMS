@@ -5,13 +5,14 @@ import App from './App'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 //bootstrap icons
-import 'bootstrap-icons/font/bootstrap-icons.css'
+// import 'bootstrap-icons/font/bootstrap-icons.css'
 import './index.css'
 // Auth Provider
 import AuthProvider from './contexts/global/AuthContext'
 import ProjectsProvider from './contexts/modules/projects/projectsContext'
 import TasksProvider from './contexts/modules/tasks/tasksContext'
 import ListsForFormsProvider from './contexts/global/ListsForForms'
+import UsersProvider from './contexts/modules/users/usersContext'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -19,7 +20,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <ProjectsProvider>
         <TasksProvider>
           <ListsForFormsProvider>
+            <UsersProvider>
             <App />
+            </UsersProvider>
           </ListsForFormsProvider>
         </TasksProvider>
       </ProjectsProvider>
