@@ -7,9 +7,9 @@ const MasterLayout = () => {
       <div className='Navbar bg-success'>
         <Navbar />
       </div>
-      <div className=' d-flex '>
+      <div className=' d-flex master'>
         <div className=''>
-          <SideBar />
+          <SideBar/>
         </div>
         <div className='content w-100'>
           <Outlet />

@@ -30,7 +30,7 @@ const SideBar = () => {
     <>
       <div className='sidebar-container position-relative'>
         <Sidebar collapsed={isCollapsed}>
-          <Menu>
+          <Menu className='mt-3'>
             <MenuItem onClick={toogleCollapsed} className='toggler-icon'>
               {isCollapsed ? (
                 <MdKeyboardArrowRight className='arrow' />

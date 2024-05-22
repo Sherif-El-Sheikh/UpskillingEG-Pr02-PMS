@@ -145,3 +145,8 @@ form .field-name {
 }
 
 /* --------------------  Pagination Styles -------------------- */
+
+.master {
+  height: auto;
+  min-height: calc(100vh - 88px);
+}
