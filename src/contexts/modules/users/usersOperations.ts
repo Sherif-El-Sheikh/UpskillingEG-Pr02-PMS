@@ -15,7 +15,7 @@ const useUsersOperations = () => {
     userName?: string,
     email?: string,
     country?: string,
-    groups?: string[]
+    groups?: string
   ) => {
     try {
       dispatch({ type: 'SET_LOADING', payload: true })
@@ -37,6 +37,7 @@ const useUsersOperations = () => {
       const message = response.data.isActivated ? 'activated' : 'deactivated'
       const userName = response.data.userName
       toast.success(`User : ${userName} is ${message} successfully`)
+      getAllUsers()
       dispatch({ type: 'SET_LOADING', payload: false })
     } catch (error: any) {
       dispatch({ type: 'SET_LOADING', payload: false })
@@ -63,7 +64,7 @@ const useUsersOperations = () => {
     dispatch({ type: 'SET_GROUPS_FILTER', payload: groupsFilter })
   }
 
-  const setPagination = (pageNumber: string, pageSize: string) => {
+  const setPagination = (pageNumber: number, pageSize: number) => {
     dispatch({ type: 'SET_PAGINATION', payload: { pageNumber, pageSize } })
   }
 
