@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { useDebouncedCallback } from 'use-debounce'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { CustomPagination, DataTable, NoData } from '../../components/shared'
@@ -6,7 +7,7 @@ import { useTasksContext } from '../../contexts/modules/tasks/tasksContext'
 import useTasksOperations from '../../contexts/modules/tasks/tasksOperations'
 
 // icons
-import { FaEdit,  FaTrashAlt } from 'react-icons/fa'
+import { FaEdit, FaTrashAlt } from 'react-icons/fa'
 import { IoFilterOutline } from 'react-icons/io5'
 
 // Model Delete
@@ -17,7 +18,6 @@ function Tasks() {
   // Modal
   const [showDelete, setShowDelete] = useState(false)
   const [taskToDeleteId, setTaskToDeleteId] = useState(0)
-
   const {
     setManagerTasksPagination,
     setManagerTasksTitleFilter,
@@ -26,6 +26,12 @@ function Tasks() {
   } = useTasksOperations()
 
   const { state: taskState } = useTasksContext()
+
+  // Debounce Filter
+  const debounceTaskTitleFilter = useDebouncedCallback(
+    (value) => setManagerTasksTitleFilter(value),
+    500
+  )
 
   useEffect(() => {
     getManagerTasks(
@@ -77,7 +83,7 @@ function Tasks() {
             type='text'
             className='rounded-5 p-2 ps-5 form-check-input w-25 h-100'
             placeholder='Search By Title'
-            onChange={(e) => setManagerTasksTitleFilter(e.target.value)}
+            onChange={(e) => debounceTaskTitleFilter(e.target.value)}
           />
           <div className='border p-2 rounded-5 d-flex align-items-center gap-2'>
             <IoFilterOutline fontSize={25} />
@@ -135,7 +141,11 @@ function Tasks() {
       </div>
 
       {/*  Model Delete */}
-      <Modal centered show={showDelete} onHide={handleDeleteClose}>
+      <Modal
+        centered
+        show={showDelete}
+        onHide={handleDeleteClose}
+      >
         <Modal.Header closeButton>
           <h3 className='modalTitle'>Delete Task {`#${taskToDeleteId}`}</h3>
         </Modal.Header>
