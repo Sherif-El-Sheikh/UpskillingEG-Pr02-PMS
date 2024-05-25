@@ -19,7 +19,7 @@ input:-webkit-autofill:active {
 .thead-color {
   background-color: rgba(49, 89, 81, 0.9) !important;
 }
-.w-40{
+.w-40 {
   width: 47%;
 }
 /* -------------------- Utility classes -------------------- */
@@ -74,7 +74,8 @@ form .field-name {
   letter-spacing: 0.07rem !important;
   font-weight: 100 !important;
 }
- .form-control:focus, .form-select:focus {
+.form-control:focus,
+.form-select:focus {
   outline: none !important;
   border: none !important;
   box-shadow: 0 0 0.25rem rgba(61, 124, 112, 0.9) !important;
@@ -150,3 +151,35 @@ form .field-name {
   height: auto;
   min-height: calc(100vh - 88px);
 }
+
+/* --------------------  dashboard Styles -------------------- */
+.banner {
+  width: 100%;
+  height: 260px;
+  background-image: url('./assets/images/dashboard-header.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 1rem;
+  color: white !important;
+  position: relative;
+}
+
+.banner::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient( to right, rgba(49, 89, 81, 0.44), rgba(0, 0, 0, 0.5));
+  border-radius: 1rem;
+  z-index: 1;
+}
+
+.stats {
+  flex-grow: 1;
+  border-radius: 1rem;
+  background-color: white;
+}
+
