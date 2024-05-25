@@ -179,4 +179,6 @@ form .field-name {
 
 .stats {
   flex-grow: 1;
+  border-radius: 1rem;
+  background-color: white;
 }

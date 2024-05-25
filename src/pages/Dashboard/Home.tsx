@@ -7,18 +7,29 @@ import { useDashboardContext } from '../../contexts/global/dashboardContext'
 
 import useProjectsOperations from '../../contexts/modules/projects/projectsOperations'
 import useTasksOperations from '../../contexts/modules/tasks/tasksOperations'
+import usePieChartData from '../../hooks/usePieChartData'
 
-import { Heading, StatsCard } from '../../components/dashboard'
-import { FaTasks, FaNetworkWired, FaUserCheck, FaUserAltSlash } from 'react-icons/fa'
+import { Heading, StatsCard, PieChart } from '../../components/dashboard'
+import {
+  FaTasks,
+  FaNetworkWired,
+  FaUserCheck,
+  FaUserAltSlash,
+} from 'react-icons/fa'
 
 const Home = () => {
   const { userData } = useAuthContext()
-  const {state: projectsState} = useProjectsContext()
-  const {state: tasksState} = useTasksContext()
-  const { userStats } = useDashboardContext()
+  const { state: projectsState } = useProjectsContext()
+  const { state: tasksState } = useTasksContext()
+  const { userStats, tasksStats } = useDashboardContext()
 
-  const {getManagerProjects} = useProjectsOperations()
-  const {getManagerTasks} = useTasksOperations()
+  const { getManagerProjects } = useProjectsOperations()
+  const { getManagerTasks } = useTasksOperations()
+
+  const { tasksPieChartData, usersPieChartData } = usePieChartData({
+    TasksData: tasksStats,
+    UsersData: userStats,
+  })
 
   useEffect(() => {
     getManagerProjects()
@@ -26,7 +37,7 @@ const Home = () => {
   }, [])
 
   return (
-    <div className='p-4'>
+    <div className='p-4 bg-body-tertiary'>
       <div className='banner d-flex flex-column justify-content-center align-items-start text-white fs-4 p-3'>
         <span className='z-3'>
           Hello <span className=' text-warning'>{userData.userName}</span>,
@@ -36,13 +47,13 @@ const Home = () => {
           You can add projects and assign tasks to your team.
         </p>
       </div>
-      <div className='charts d-flex justify-content-between'>
+      <div className='data d-flex justify-content-between py-3 gap-3'>
         <div className='stats tasks-stats py-3'>
           <Heading
             title='Tasks'
             description='Explore your team latest tasks stats.'
           />
-          <div className='d-flex gap-3 justify-content-start align-items-center mt-3'>
+          <div className='d-flex px-3 gap-3 justify-content-start align-items-center mt-3'>
             <StatsCard
               title='Tasks Number'
               value={tasksState.managerTotalNumberOfRecords}
@@ -58,13 +69,16 @@ const Home = () => {
               bgColor='#F4E5ED'
             />
           </div>
+          <div className='charts mt-5 d-flex justify-content-center'>
+            <PieChart data={tasksPieChartData} title='Tasks Stats' />
+          </div>
         </div>
         <div className='stats users-stats py-3'>
           <Heading
             title='Users'
             description='Explore your team activity stats.'
           />
-          <div className='d-flex gap-3 justify-content-start align-items-center mt-3'>
+          <div className='d-flex px-3 gap-3 justify-content-start align-items-center mt-3'>
             <StatsCard
               title='Active Users'
               value={userStats.activatedEmployeeCount}
@@ -79,6 +93,9 @@ const Home = () => {
               color='#E4E4BC'
               bgColor='#F4F4E5'
             />
+          </div>
+          <div className='charts mt-5 d-flex justify-content-center'>
+            <PieChart data={usersPieChartData} title='Users Stats' />
           </div>
         </div>
       </div>
