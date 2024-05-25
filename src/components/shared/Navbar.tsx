@@ -5,7 +5,7 @@ import { useAuthContext } from '../../contexts/global/AuthContext'
 const Navbar = () => {
   const { userData } = useAuthContext()
   return (
-    <nav className='navbar navbar-expand-lg bg-body-tertiary text-end'>
+    <nav className='navbar navbar-expand-lg bg-body-tertiary text-end shadow-sm'>
       <div className='container-fluid'>
         <div>
           <img src={logo} alt='' />

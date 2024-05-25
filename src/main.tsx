@@ -12,6 +12,7 @@ import AuthProvider from './contexts/global/AuthContext'
 import ProjectsProvider from './contexts/modules/projects/projectsContext'
 import TasksProvider from './contexts/modules/tasks/tasksContext'
 import ListsForFormsProvider from './contexts/global/ListsForForms'
+import DashboardProvider from './contexts/global/dashboardContext'
 import UsersProvider from './contexts/modules/users/usersContext'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -21,7 +22,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <TasksProvider>
           <ListsForFormsProvider>
             <UsersProvider>
-            <App />
+              <DashboardProvider>
+                <App />
+              </DashboardProvider>
             </UsersProvider>
           </ListsForFormsProvider>
         </TasksProvider>
