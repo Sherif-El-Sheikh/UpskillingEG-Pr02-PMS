@@ -2,10 +2,18 @@
   background-color: transparent;
   border: none;
 }
+.sidebar-container {
+  height: 100% !important;
+  background-color: rgba(14, 56, 47, 1);
+}
+/* .ps-menu-root {
+  margin-top: 10rem;
+} */
 .sidebar-container .ps-sidebar-container {
+  
   background-color: rgba(14, 56, 47, 1);
   color: white;
-  height: 100vh;
+  min-height: 100% !important;
 }
 .ps-sidebar-container .ps-menu-icon img {
   position: absolute;
