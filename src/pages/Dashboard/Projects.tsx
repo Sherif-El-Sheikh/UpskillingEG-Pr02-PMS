@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react'
 import { useProjectsContext } from '../../contexts/modules/projects/projectsContext'
 import useProjectsOperations from '../../contexts/modules/projects/projectsOperations'
+import { useDebouncedCallback } from 'use-debounce'
 import {
   CustomPagination,
   DataTable,
@@ -24,6 +25,14 @@ function Projects() {
     deleteProject,
   } = useProjectsOperations()
   const { state: projectsState } = useProjectsContext()
+
+  // Debounce Filter
+  const debounceProjectTitleFilter = useDebouncedCallback(
+    (value) => setManagerProjectsTitleFilter(value),
+    500
+  )
+
+  
   useEffect(() => {
     getManagerProjects(
       projectsState.managerPageNumber,
@@ -61,7 +70,7 @@ function Projects() {
             type='text'
             className=' rounded-4 p-2 ps-5 form-check-input w-25 h-100 mb-5'
             placeholder='Search By Title'
-            onChange={(e) => setManagerProjectsTitleFilter(e.target.value)}
+            onChange={(e) => debounceProjectTitleFilter(e.target.value)}
           />
         </div>
         <DataTable tableColumns={columns}>
@@ -108,7 +117,11 @@ function Projects() {
         )}
       </div>
       {/*  Model Delete */}
-      <Modal centered show={showDelete} onHide={handleDeleteClose}>
+      <Modal
+        centered
+        show={showDelete}
+        onHide={handleDeleteClose}
+      >
         <Modal.Header closeButton>
           <h3 className='modalTitle'>Delete Project</h3>
         </Modal.Header>
