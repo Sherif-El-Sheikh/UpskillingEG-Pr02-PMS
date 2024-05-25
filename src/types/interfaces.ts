@@ -55,3 +55,16 @@ export interface Action {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   payload: any
 }
+
+export interface UserStats {
+  activatedEmployeeCount: number
+  deactivatedEmployeeCount: number
+}
+
+export interface TasksStats {
+  toDo:       number;
+  inProgress: number;
+  done:       number;
+}
+
+
