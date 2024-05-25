@@ -1,4 +1,5 @@
-import { useEffect, useMemo } from 'react'
+import {  useDebouncedCallback } from 'use-debounce'
+import { useEffect } from 'react'
 import {
   CustomPagination,
   DataTable,
@@ -18,6 +19,21 @@ function Users() {
     setPagination,
   } = useUsersOperations()
   const { state } = useUsersContext()
+  // Debounce Filter
+  const debouncedSetUserNameFilter = useDebouncedCallback(
+    (value) => setUserNameFilter(value),
+    500
+  )
+  const debouncedSetEmailFilter = useDebouncedCallback(
+    (value) => setEmailFilter(value),
+    500
+  )
+
+  const debouncedSetCountryFilter = useDebouncedCallback(
+    (value) => setCountryFilter(value),
+    500
+  )
+
   useEffect(() => {
     getAllUsers(
       state.pageNumber,
@@ -50,22 +66,19 @@ function Users() {
             type='text'
             className='form-control rounded-5 w-40'
             placeholder='Search By UserName'
-            value={state.userNameFilter}
-            onChange={(e) => setUserNameFilter(e.target.value)}
+            onChange={(e) => debouncedSetUserNameFilter(e.target.value)}
           />
           <input
             type='text'
             className='form-control rounded-5 w-40'
             placeholder='Search By Email'
-            value={state.emailFilter}
-            onChange={(e) => setEmailFilter(e.target.value)}
+            onChange={(e) => debouncedSetEmailFilter(e.target.value)}
           />
           <input
             type='text'
             className='form-control rounded-5 w-40'
             placeholder='Search By Country'
-            value={state.countryFilter}
-            onChange={(e) => setCountryFilter(e.target.value)}
+            onChange={(e) => debouncedSetCountryFilter(e.target.value)}
           />
           <select
             className='form-select rounded-5 w-40'
