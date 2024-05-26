@@ -12,6 +12,13 @@ input:-webkit-autofill:active {
   cursor: pointer;
 }
 
+.cursor-draggable {
+  cursor: grab;
+}
+.cursor-dragging {
+  cursor: grabbing;
+}
+
 .text-main {
   color: #ef9b28 !important;
 }

@@ -34,18 +34,24 @@ const EmployeeTasks = () => {
         <h2>Task Board</h2>
       </div>
       <div className='continer mt-3 overflow-hidden'>
-        <div className='row gap-sm-2 gap-md-5 justify-content-center'>
+        <div className='row gap-sm-2 gap-md-3 justify-content-around'>
           <TasksList
             listTitle={'To Do'}
-            tasks={tasks.filter((task) => task.status === 'ToDo')}
+            listStatus='ToDo'
+            tasks={tasks}
+            setTasks={setTasks}
           />
           <TasksList
             listTitle={'In Progress'}
-            tasks={tasks.filter((task) => task.status === 'InProgress')}
+            listStatus='InProgress'
+            tasks={tasks}
+            setTasks={setTasks}
           />
           <TasksList
             listTitle={'Done'}
-            tasks={tasks.filter((task) => task.status === 'Done')}
+            listStatus='Done'
+            tasks={tasks}
+            setTasks={setTasks}
           />
         </div>
       </div>
