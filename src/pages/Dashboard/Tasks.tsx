@@ -10,7 +10,7 @@ const Tasks = () => {
       <Button onClick={() => setIsAdmin(!isAdmin)}>
         {isAdmin ? 'Switch to Employee' : 'Switch to Admin'}
       </Button>
-      <div className='bg-body-tertiary min'>
+      <div className='bg-body-tertiary h-100'>
         {isAdmin ? <AdminTasks /> : <EmployeeTasks />}
       </div>
     </>

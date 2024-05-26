@@ -35,9 +35,18 @@ const EmployeeTasks = () => {
       </div>
       <div className='continer mt-3 overflow-hidden'>
         <div className='row gap-sm-2 gap-md-5 justify-content-center'>
-          <TasksList listTitle={'To Do'} tasks={tasks} />
-          <TasksList listTitle={'In Progress'} tasks={tasks} />
-          <TasksList listTitle={'Done'} tasks={tasks} />
+          <TasksList
+            listTitle={'To Do'}
+            tasks={tasks.filter((task) => task.status === 'ToDo')}
+          />
+          <TasksList
+            listTitle={'In Progress'}
+            tasks={tasks.filter((task) => task.status === 'InProgress')}
+          />
+          <TasksList
+            listTitle={'Done'}
+            tasks={tasks.filter((task) => task.status === 'Done')}
+          />
         </div>
       </div>
     </>
