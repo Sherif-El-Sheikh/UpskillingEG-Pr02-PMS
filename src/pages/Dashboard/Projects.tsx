@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react'
 import { useProjectsContext } from '../../contexts/modules/projects/projectsContext'
 import useProjectsOperations from '../../contexts/modules/projects/projectsOperations'
 import { useDebouncedCallback } from 'use-debounce'
+import { useAuthContext } from '../../contexts/global/AuthContext'
+
 import {
   CustomPagination,
   DataTable,
@@ -16,6 +18,9 @@ import { Modal, Button } from 'react-bootstrap'
 import deleteAvatar from '../../assets/images/no-data.png'
 
 function Projects() {
+  const { userData } = useAuthContext()
+  const isAdmin = userData.userGroup !== 'Employee'
+
   const [showDelete, setShowDelete] = useState(false)
   const [projectsMangerId, setProjectsMangerId] = useState(0)
   const {
@@ -32,13 +37,14 @@ function Projects() {
     500
   )
 
-  
   useEffect(() => {
-    getManagerProjects(
-      projectsState.managerPageNumber,
-      projectsState.managerPageSize,
-      projectsState.managerTitle
-    )
+    if (isAdmin) {
+      getManagerProjects(
+        projectsState.managerPageNumber,
+        projectsState.managerPageSize,
+        projectsState.managerTitle
+      )
+    }
   }, [
     projectsState.managerPageNumber,
     projectsState.managerPageSize,
@@ -117,11 +123,7 @@ function Projects() {
         )}
       </div>
       {/*  Model Delete */}
-      <Modal
-        centered
-        show={showDelete}
-        onHide={handleDeleteClose}
-      >
+      <Modal centered show={showDelete} onHide={handleDeleteClose}>
         <Modal.Header closeButton>
           <h3 className='modalTitle'>Delete Project</h3>
         </Modal.Header>

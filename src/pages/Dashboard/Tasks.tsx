@@ -1,15 +1,12 @@
-import { useState } from 'react'
+import { useAuthContext } from '../../contexts/global/AuthContext'
 
 import { AdminTasks, EmployeeTasks } from '../../components/Tasks'
-import { Button } from 'react-bootstrap'
 
 const Tasks = () => {
-  const [isAdmin, setIsAdmin] = useState(false)
+  const { userData } = useAuthContext()
+  const isAdmin = userData.userGroup !== 'Employee'
   return (
     <>
-      <Button onClick={() => setIsAdmin(!isAdmin)}>
-        {isAdmin ? 'Switch to Employee' : 'Switch to Admin'}
-      </Button>
       <div className='bg-body-tertiary h-100'>
         {isAdmin ? <AdminTasks /> : <EmployeeTasks />}
       </div>
