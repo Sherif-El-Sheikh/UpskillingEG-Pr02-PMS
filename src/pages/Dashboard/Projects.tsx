@@ -3,7 +3,9 @@ import { useEffect, useState } from 'react'
 import { useProjectsContext } from '../../contexts/modules/projects/projectsContext'
 import useProjectsOperations from '../../contexts/modules/projects/projectsOperations'
 import { useDebouncedCallback } from 'use-debounce'
+
 import { useAuthContext } from '../../contexts/global/AuthContext'
+
 
 import {
   CustomPagination,
@@ -36,6 +38,7 @@ function Projects() {
     (value) => setManagerProjectsTitleFilter(value),
     500
   )
+
 
   useEffect(() => {
     if (isAdmin) {
@@ -123,7 +126,11 @@ function Projects() {
         )}
       </div>
       {/*  Model Delete */}
-      <Modal centered show={showDelete} onHide={handleDeleteClose}>
+      <Modal
+        centered
+        show={showDelete}
+        onHide={handleDeleteClose}
+      >
         <Modal.Header closeButton>
           <h3 className='modalTitle'>Delete Project</h3>
         </Modal.Header>
