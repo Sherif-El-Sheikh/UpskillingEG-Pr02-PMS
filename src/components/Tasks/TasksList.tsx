@@ -1,6 +1,8 @@
 import { Task } from '../../types/interfaces'
 import { TaskCard } from './'
 
+import { motion } from 'framer-motion'
+
 type ListStatus = 'ToDo' | 'InProgress' | 'Done'
 
 interface TaskListProps {
@@ -45,7 +47,9 @@ const TasksList = ({
     <>
       <div className='col-sm-12 col-md-3'>
         <h4 className='mb-4'>{listTitle}</h4>
-        <div
+        <motion.div
+          layout={true}
+          layoutId={listStatus}
           onDragEnter={() => handleDragEnter(listStatus)}
           onDragOver={(e) => e.preventDefault()}
           onDrop={(e) => handleDrop(e)}
@@ -58,7 +62,7 @@ const TasksList = ({
             .map((task) => (
               <TaskCard key={task.id} task={task} />
             ))}
-        </div>
+        </motion.div>
       </div>
     </>
   )
