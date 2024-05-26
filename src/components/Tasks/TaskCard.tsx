@@ -9,8 +9,10 @@ const TaskCard = ({ task }: { task: Task }) => {
         draggable
         onDragStart={(e) => {
           e.dataTransfer.setData('id', task.id.toString())
+          setIsDragging(true)
         }}
-        onDragOver={() => setIsDragging(true)}
+        
+        onDragEnd={() => setIsDragging(false)}
         className={`orange-bg d-flex justify-content-between w-100 mx-auto p-2 rounded-3 
           ${isDragging ? 'cursor-dragging' : 'cursor-draggable'}
         `}

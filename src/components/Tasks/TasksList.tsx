@@ -10,6 +10,11 @@ interface TaskListProps {
   hoveredOverList: ListStatus | null
   setTasks: React.Dispatch<React.SetStateAction<Task[]>>
   setHoveredOverList: React.Dispatch<React.SetStateAction<ListStatus | null>>
+  updateTaskStatus: (
+    id: string | number,
+    oldStatus: ListStatus,
+    newStatus: ListStatus
+  ) => void
 }
 
 const TasksList = ({
@@ -19,14 +24,17 @@ const TasksList = ({
   setTasks,
   hoveredOverList,
   setHoveredOverList,
+  updateTaskStatus,
 }: TaskListProps) => {
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     const id = e.dataTransfer.getData('id')
     const task = tasks.find((task) => task.id === parseInt(id))
     if (task) {
+      const oldStatus = task.status as ListStatus
       task.status = listStatus
       setTasks([...tasks])
-      // todo - update task status in backend && Refetch tasks
+      // update task status in backend && Refetch tasks --> Done
+      updateTaskStatus(id, oldStatus, listStatus)
     }
     setHoveredOverList(null)
   }
