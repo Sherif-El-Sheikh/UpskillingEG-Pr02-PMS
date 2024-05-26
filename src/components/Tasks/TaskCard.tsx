@@ -11,7 +11,7 @@ const TaskCard = ({ task }: { task: Task }) => {
           e.dataTransfer.setData('id', task.id.toString())
         }}
         onDragOver={() => setIsDragging(true)}
-        className={`orange-bg d-flex justify-content-between w-100 m-auto p-2 rounded-3 
+        className={`orange-bg d-flex justify-content-between w-100 mx-auto p-2 rounded-3 
           ${isDragging ? 'cursor-dragging' : 'cursor-draggable'}
         `}
       >

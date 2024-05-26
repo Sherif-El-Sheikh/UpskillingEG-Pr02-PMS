@@ -193,3 +193,12 @@ form .field-name {
   background-color: white;
 }
 
+
+
+/* --------------------  DND Styles -------------------- */
+.hoverdOverList {
+  outline: 2px solid #ef9b28;
+  outline-offset: -2px;
+  min-height: 20rem;
+  transition: all 0.3s;
+}

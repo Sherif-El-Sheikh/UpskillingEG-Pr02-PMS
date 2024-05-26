@@ -5,9 +5,14 @@ import { apiProtected } from '../../utils/api'
 import TasksList from './TasksList'
 import { Task } from '../../types/interfaces'
 
+
+type ListStatus = 'ToDo' | 'InProgress' | 'Done'
+
+
 const EmployeeTasks = () => {
   const [tasks, setTasks] = useState<Task[]>([])
   const [loading, setLoading] = useState(false)
+  const [hoveredOverList, setHoveredOverList] = useState<ListStatus | null>(null)
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -40,18 +45,24 @@ const EmployeeTasks = () => {
             listStatus='ToDo'
             tasks={tasks}
             setTasks={setTasks}
+            hoveredOverList={hoveredOverList}
+            setHoveredOverList={setHoveredOverList}
           />
           <TasksList
             listTitle={'In Progress'}
             listStatus='InProgress'
             tasks={tasks}
             setTasks={setTasks}
+            hoveredOverList={hoveredOverList}
+            setHoveredOverList={setHoveredOverList}
           />
           <TasksList
             listTitle={'Done'}
             listStatus='Done'
             tasks={tasks}
             setTasks={setTasks}
+            hoveredOverList={hoveredOverList}
+            setHoveredOverList={setHoveredOverList}
           />
         </div>
       </div>
