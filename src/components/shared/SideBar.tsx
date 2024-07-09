@@ -15,9 +15,13 @@ import ChangePass from './ChangePass'
 import './styles/Sidebar.css'
 
 const SideBar = () => {
-  const [isCollapsed, setIsCollapsed] = useState(false)
+  const [isCollapsed, setIsCollapsed] = useState(() => {
+    const sideBarOpen = localStorage.getItem('sideBarOpen')
+    return sideBarOpen === 'true'
+  })
   const toogleCollapsed = () => {
     setIsCollapsed(!isCollapsed)
+    localStorage.setItem('sideBarOpen', (!isCollapsed).toString())
   }
 
   const { logOut, userData } = useAuthContext()
