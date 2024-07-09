@@ -1,10 +1,8 @@
+import { useEffect } from 'react'
 
+import { useDebouncedCallback } from 'use-debounce'
 
-import { useEffect, useMemo } from 'react'
-
-import {  useDebouncedCallback } from 'use-debounce'
-
-
+import { FaToggleOff, FaToggleOn } from 'react-icons/fa'
 import {
   CustomPagination,
   DataTable,
@@ -12,7 +10,6 @@ import {
 } from '../../components/shared'
 import { useUsersContext } from '../../contexts/modules/users/usersContext'
 import useUsersOperations from '../../contexts/modules/users/usersOperations'
-import { FaToggleOn, FaToggleOff } from 'react-icons/fa'
 function Users() {
   const {
     getAllUsers,
@@ -64,8 +61,8 @@ function Users() {
       <div className='d-flex  align-items-center bg-white shadow-sm p-3 '>
         <h2>Users</h2>
       </div>
-      {/* Filteration Users */}
       <div className='bg-white col-11 mx-auto shadow-lg mt-5 p-4 rounded-3'>
+        {/* Filteration Users */}
         <div className='d-flex align-items-center justify-content-between my-3 gap-3 flex-wrap'>
           <input
             type='text'
@@ -96,11 +93,16 @@ function Users() {
           </select>
         </div>
         {/* Table of Data */}
-        <DataTable tableColumns={columns}>
-          {state.loading ? (
+        {state.loading ? (
+          <div
+            className='d-flex flex-column gap-3 justify-content-center align-items-center'
+            style={{ height: '30vh' }}
+          >
             <LoadingScreen />
-          ) : (
-            state.users.map((user, index) => (
+          </div>
+        ) : (
+          <DataTable tableColumns={columns}>
+            {state.users.map((user, index) => (
               <tr key={index}>
                 <td>{++index}</td>
                 <td>{user.userName}</td>
@@ -122,21 +124,15 @@ function Users() {
                   onClick={() => toggleUserActiveStatus(user.id)}
                 >
                   {user.isActivated ? (
-                    <FaToggleOn
-                      size={35}
-                      className=' text-success'
-                    />
+                    <FaToggleOn size={35} className=' text-success' />
                   ) : (
-                    <FaToggleOff
-                      size={35}
-                      className=' text-danger'
-                    />
+                    <FaToggleOff size={35} className=' text-danger' />
                   )}
                 </td>
               </tr>
-            ))
-          )}
-        </DataTable>
+            ))}
+          </DataTable>
+        )}
         {/* Pagination */}
         {!state.loading && state.totalNumberOfRecords >= 10 && (
           <CustomPagination
@@ -147,7 +143,6 @@ function Users() {
           />
         )}
       </div>
-      {/* Users Table */}
     </>
   )
 }
