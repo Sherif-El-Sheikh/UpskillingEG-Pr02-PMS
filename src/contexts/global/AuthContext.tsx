@@ -13,7 +13,16 @@ export const AuthContext = createContext<AuthContextType | null>(null)
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [userData, setUserData] = useState({})
-  const [loggedIn, setIsLoggedIn] = useState(false)
+  const [loggedIn, setIsLoggedIn] = useState(() => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      const decodedToken = jwtDecode(token)
+      if (decodedToken) {
+        return true
+      }
+    }
+    return false
+  })
   const [loading, setLoading] = useState(false)
 
   const saveLoginData = () => {
