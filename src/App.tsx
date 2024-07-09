@@ -4,9 +4,6 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-import { useEffect } from 'react'
-import { useAuthContext } from './contexts/global/AuthContext'
-
 // Pages
 import {
   ForgotPassPage,
@@ -16,40 +13,30 @@ import {
   VerifyPassPage,
 } from './pages/Auth'
 import {
+  AddProject,
+  AddTask,
+  EditProject,
+  EditTask,
   Home,
-  Projects,
   ProjectDetails,
+  Projects,
   Tasks,
   Users,
-  AddTask,
-  EditTask,
-  AddProject,
-  EditProject,
 } from './pages/Dashboard'
 // RouteGuard and Layouts
 import { RouteGuard } from './components/shared'
 import { AuthLayoutWrapper, MasterLayout } from './layouts'
 import Notfound from './pages/Notfound/Notfound'
 
-import { LoadingScreen } from './components/shared'
-
 function App() {
   // auth context
-  const { loggedIn, saveLoginData, loading } = useAuthContext()
-  useEffect(() => {
-    // console.log('App mounted', loggedIn)
-
-    saveLoginData()
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loggedIn])
 
   // router
   const router = createBrowserRouter([
     {
       path: '/dashboard',
       element: (
-        <RouteGuard redirectPath='/login' isAllowed={loggedIn}>
+        <RouteGuard>
           <MasterLayout />
         </RouteGuard>
       ),
@@ -95,11 +82,7 @@ function App() {
     },
     {
       path: '/',
-      element: (
-        <RouteGuard redirectPath='/dashboard' isAllowed={!loggedIn}>
-          <AuthLayoutWrapper />
-        </RouteGuard>
-      ),
+      element: <AuthLayoutWrapper />,
       errorElement: <Notfound />,
       children: [
         {
@@ -129,14 +112,6 @@ function App() {
       ],
     },
   ])
-
-  if (loading) {
-    return (
-      <div className='w-100 h-100 my-5 py-5 d-flex flex-column justify-content-center align-items-center gap-3'>
-        <LoadingScreen />
-      </div>
-    )
-  }
 
   return (
     <>

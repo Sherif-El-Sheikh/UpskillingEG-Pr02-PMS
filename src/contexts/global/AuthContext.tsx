@@ -1,49 +1,39 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createContext, useContext, useState } from 'react'
 import { jwtDecode } from 'jwt-decode'
 
 export type AuthContextType = {
-  userData: Record<string, string>
+  userData: Record<string, any>
   loggedIn: boolean
-  loading: boolean
-  saveLoginData: () => void
+  setIsLoggedIn: (value: boolean) => void
   logOut: () => void
 }
 
 export const AuthContext = createContext<AuthContextType | null>(null)
 
-const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [userData, setUserData] = useState({})
-  const [loggedIn, setIsLoggedIn] = useState(() => {
-    const token = localStorage.getItem('token')
-    if (token) {
-      const decodedToken = jwtDecode(token)
-      if (decodedToken) {
-        return true
-      }
-    }
-    return false
-  })
-  const [loading, setLoading] = useState(false)
+//
 
-  const saveLoginData = () => {
-    setLoading(true)
+const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+  const getTokenData = () => {
     const token = localStorage.getItem('token')
     if (token) {
-      const decodedToken = jwtDecode(token)
-      if (decodedToken) {
-        setIsLoggedIn(true)
-        setUserData(decodedToken)
-      } else {
-        setIsLoggedIn(false)
-        setUserData({})
+      try {
+        const decodedToken = jwtDecode(token)
+        return { decodedToken, isLoggedIn: true }
+      } catch (error) {
+        console.error('Token decoding failed', error)
       }
     }
-    setLoading(false)
+    return { decodedToken: {}, isLoggedIn: false }
   }
+
+  const [userData, setUserData] = useState(getTokenData().decodedToken)
+  const [loggedIn, setIsLoggedIn] = useState(getTokenData().isLoggedIn)
 
   const logOut = () => {
     localStorage.removeItem('token')
     setIsLoggedIn(false)
+    setUserData({})
   }
 
   return (
@@ -51,9 +41,8 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       value={{
         userData,
         loggedIn,
-        loading,
-        saveLoginData,
         logOut,
+        setIsLoggedIn,
       }}
     >
       {children}

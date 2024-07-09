@@ -1,14 +1,14 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { apiPublic } from '../../utils/api'
 import { notify } from '../../utils/notify'
 
 import { Form, InputGroup } from 'react-bootstrap'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import { AuthForm, LoadingSpinner } from '../../components/shared'
-import { useAuthContext } from '../../contexts/global/AuthContext'
 import AuthLayout from '../../layouts/AuthLayout'
+import { useAuthContext } from '../../contexts/global/AuthContext'
 
 // type of data from form
 interface FormData {
@@ -17,7 +17,15 @@ interface FormData {
 }
 
 const LoginPage = () => {
-  const { saveLoginData } = useAuthContext()
+  const navigate = useNavigate()
+  const { loggedIn, setIsLoggedIn } = useAuthContext()
+
+  useEffect(() => {
+    if (loggedIn) {
+      navigate('/dashboard')
+    }
+  }, [loggedIn, navigate])
+
   const [btnLoading, setBtnLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const {
@@ -34,7 +42,7 @@ const LoginPage = () => {
         type: 'success',
         message: 'Logged in successfully',
       })
-      saveLoginData()
+      setIsLoggedIn(true)
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       notify({

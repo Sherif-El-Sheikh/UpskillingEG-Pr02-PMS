@@ -1,13 +1,9 @@
-import { Navigate } from "react-router-dom";
+import { Navigate } from 'react-router-dom'
+import { useAuthContext } from '../../contexts/global/AuthContext'
 
-interface RouteGuardProps {
-  isAllowed: boolean;
-  redirectPath: string;
-  children: React.ReactNode;
+const RouteGuard = ({ children }: { children: React.ReactNode }) => {
+  const { loggedIn } = useAuthContext()
+  return loggedIn ? children : <Navigate to={'/login'} replace />
 }
 
-const RouteGuard = ({ isAllowed, redirectPath, children }: RouteGuardProps) => {
-  return isAllowed ? children : <Navigate to={redirectPath} replace />;
-};
-
-export default RouteGuard;
+export default RouteGuard
