@@ -1,13 +1,12 @@
-import AuthLayout from "../../layouts/AuthLayout";
-import { AuthForm, LoadingSpinner } from "../../components/shared";
+import { useState } from "react";
 import { Form, InputGroup } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthForm, LoadingSpinner } from "../../components/shared";
+import AuthLayout from "../../layouts/AuthLayout";
 import { apiProtected } from "../../utils/api";
 import { notify } from "../../utils/notify";
-import { useNavigate } from "react-router-dom";
-import React from "react";
 
 interface FormData {
   email: string;

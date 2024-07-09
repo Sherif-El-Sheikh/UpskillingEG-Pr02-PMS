@@ -14,7 +14,7 @@ function ProjectDetails() {
   const { state: projectsState } = useProjectsContext()
 
   useEffect(() => {
-    getProjectById(+projectId)
+    getProjectById(projectId)
     console.log(projectsState.selectedProject)
   }, [projectId])
 
