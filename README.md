@@ -4,6 +4,12 @@
 
 This Project Management System (PMS) is a web-based application developed as part of the UpSkillingEG Front-end Job Simulation Bootcamp. It aims to provide a comprehensive solution for managing projects, tasks, and team members.
 
+## Demo
+
+You may watch the following video demo:
+
+> Or you can try the live demo yourself [here](https://upskilling-pms.netlify.app/).
+
 ## Features
 
 ### User Authentication and Authorization
