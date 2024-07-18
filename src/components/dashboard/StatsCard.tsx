@@ -20,7 +20,7 @@ const StatsCard = ({ title, value, icon, color, bgColor }: StatsCardProps) => {
     >
       <Card.Body>
         <Card.Text>
-          <div
+          <span
             style={{
               backgroundColor: color,
               borderRadius: '10px',
@@ -33,7 +33,7 @@ const StatsCard = ({ title, value, icon, color, bgColor }: StatsCardProps) => {
             }}
           >
             {icon}
-          </div>
+          </span>
         </Card.Text>
         <Card.Subtitle className='mb-2'>{title}</Card.Subtitle>
         <Card.Title>{value}</Card.Title>

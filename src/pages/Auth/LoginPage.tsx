@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { apiPublic } from '../../utils/api'
@@ -7,8 +7,8 @@ import { notify } from '../../utils/notify'
 import { Form, InputGroup } from 'react-bootstrap'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import { AuthForm, LoadingSpinner } from '../../components/shared'
-import AuthLayout from '../../layouts/AuthLayout'
 import { useAuthContext } from '../../contexts/global/AuthContext'
+import AuthLayout from '../../layouts/AuthLayout'
 
 // type of data from form
 interface FormData {
@@ -18,13 +18,7 @@ interface FormData {
 
 const LoginPage = () => {
   const navigate = useNavigate()
-  const { loggedIn, setIsLoggedIn } = useAuthContext()
-
-  useEffect(() => {
-    if (loggedIn) {
-      navigate('/dashboard')
-    }
-  }, [loggedIn, navigate])
+  const { login } = useAuthContext()
 
   const [btnLoading, setBtnLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
@@ -42,7 +36,8 @@ const LoginPage = () => {
         type: 'success',
         message: 'Logged in successfully',
       })
-      setIsLoggedIn(true)
+      login(response.data.token)
+      navigate('/dashboard')
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       notify({
