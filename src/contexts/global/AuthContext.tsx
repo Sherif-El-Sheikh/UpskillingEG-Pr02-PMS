@@ -7,6 +7,7 @@ export type AuthContextType = {
   loggedIn: boolean
   setIsLoggedIn: (value: boolean) => void
   logOut: () => void
+  login: (token: string) => void
 }
 
 export const AuthContext = createContext<AuthContextType | null>(null)
@@ -36,11 +37,19 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setUserData({})
   }
 
+  const login = (token: string) => {
+    localStorage.setItem('token', token)
+    const decodedToken = jwtDecode(token)
+    setUserData(decodedToken)
+    setIsLoggedIn(true)
+  }
+
   return (
     <AuthContext.Provider
       value={{
         userData,
         loggedIn,
+        login,
         logOut,
         setIsLoggedIn,
       }}
