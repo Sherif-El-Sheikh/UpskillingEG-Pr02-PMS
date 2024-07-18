@@ -49,7 +49,9 @@ The project structure is as follows:
 - **React Toastify:** For toast notifications.
 - **React Icons:** For icons.
 - **Context API:** For managing application state across components.
-- **React Router:** For navigation within the application.
+- **React-Pro-Sidebar:** For sidebar.
+- **Chart.js:** For dashboard charts.
+- **Framer-motion:** For drag and drop animation.
 
 ## Skills and Techniques Covered
 
