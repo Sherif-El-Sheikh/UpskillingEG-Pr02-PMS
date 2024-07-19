@@ -18,7 +18,7 @@ You may watch the following video demo:
 
 ### User Authentication and Authorization
 
-- **User Authentication:** Secure login and registration system to manage user access.
+- **User Authentication:** Secure login and registration system to manage user access, including "Forgot Password" and "Change Password" features for password recovery and management.
 - **User Roles:** Differentiated user roles, including Manager and Employee users, to control access levels within the application.
 
 ### Task Management
